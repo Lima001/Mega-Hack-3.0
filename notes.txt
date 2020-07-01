@@ -1,8 +1,9 @@
 - O processo de modelagem do Banco de Dados ainda está em desenvolvimento,
 sendo assim não asseguro a veracidade e integridade do programa
 
-- As classes comentadas são aquelas que encontrei dificuldade em modelar
-(como devo construir meu BD para que seja funcional?)
+- As classes que tive mais dificuldade foram as relacionadas a reserva.
+Qualquer coisa que vcs tiverem para adicionar seria de extrema ajuda.
+(Pensem: como devo construir meu BD para que seja funcional?)
 
 - As classes já implementadas podem sofrer modificações (Inclusive, qualquer ideia
 ficaria grato de ser alertado)

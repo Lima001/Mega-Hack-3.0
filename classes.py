@@ -26,6 +26,7 @@ class Prato(BaseModel):
     #Dizer quando tal prato é ofertado no Restaurante
     #To pensando em criar um padrao de String para armazenar isso
     dia_periodo = CharField()
+    nota = FloatField(null=True)
     categorias = ManyToManyField(Categoria)
 
 class Bebida(BaseModel):
@@ -36,28 +37,13 @@ class Bebida(BaseModel):
     #Dizer quando tal prato é ofertado no Restaurante
     #To pensando em criar um padrao de String para armazenar isso
     dia_periodo = CharField()
+    nota = FloatField(null=True)
     categorias = ManyToManyField(Categoria)
 
 #Contem os Pratos e Bebidas de um Estabelecimento
 class Cardapio(BaseModel):
     pratos = ManyToManyField(Prato)
     bebidas = ManyToManyField(Bebida)
-
-
-#class Agenda(BaseModel):
-#    vagas_livres = IntegerField()
-#    total_reservas = Integer(Field)
-#    regime = IntegerField()
-#    modelo = CharField()
-
-#class Data(BaseModel):
-#    dia = DateTime()
-#    horario_inicio = CharField()
-#    horario_termino = CharField()
-#    lotacao_maxima = IntegerField()
-#    permitir_reserva = BooleanField(default=False)
-#    agenda = ForeignKey(Agenda)
-#    reservas = ManyToMany(Reserva)
 
 class Cliente(BaseModel):
     cpf = CharField(primary_key=True, max_length=14)
@@ -67,27 +53,39 @@ class Cliente(BaseModel):
     senha = CharField()
     #imagem = BlobField()
     telefone = CharField()
-    #local?
+    #local = ForeignKeyField(Local)
 
-#class Estabelecimento(BaseModel):
-#    cnpj = CharField(primary_key=True, max_length=14)
-#    nome_ficticio = CharField(max_length=100)
-#    email = CharField()
-#    senha = CharField()
+class Estabelecimento(BaseModel):
+    cnpj = CharField(primary_key=True, max_length=14)
+    nome_ficticio = CharField(max_length=100)
+    email = CharField()
+    senha = CharField()
     #imagem = BlobField()
-#    telefone = CharField()
-#    qtd_views = IntegerField()
-#    local = ForeignKeyField(Local)
-#    agenada = ForeignKeyField(Agenda)
-#    cardapio = ForeignKeyField(Cardapio)
+    telefone = CharField()
+    avaliacao = FloatField(null=True)
+    qtd_visitas = IntegerField()
+    operando = BooleanField(default=True)
+    local = ForeignKeyField(Local)
+    cardapio = ForeignKeyField(Cardapio)
 
-#class Reserva(BaseModel):
-#    data_solicitacao = DateTimeField()
-#    cliente = ForeignKeyField(Cliente)
-#    qtd_pessoas = IntegerField()
-#    duracao = IntegerField()
-#    agenda = ForeignKeyField(Agenda)
-#    confirmacao = BooleanField(default=False)
+class Reserva(BaseModel):
+    data_requisicao = DateTimeField()
+    cliente = ForeignKeyField(Cliente)
+    estabelecimento = ForeignKeyField(Estabelecimento)
+    qtd_pessoas = IntegerField()
+    data_marcada = DateField()
+    horario_chegada = TimeField()
+    horario_saida = TimeField()
+    pratos = ManyToManyField(Prato, null=True)
+    bebidas = ManyToManyField(Bebida, null=True)
+    confirmacao = BooleanField(default=False)
+
+class Agenda(BaseModel):
+    dias = CharField()
+    periodo = CharField()
+    qtd_lugares = IntegerField()
+    lotacao_maxima_permetida = IntegerField()
+    estabelecimento = ForeignKeyField(Estabelecimento)
 
 class Notificacao(BaseModel):
     pass
