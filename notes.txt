@@ -1,0 +1,19 @@
+- O processo de modelagem do Banco de Dados ainda está em desenvolvimento,
+sendo assim não asseguro a veracidade e integridade do programa
+
+- As classes comentadas são aquelas que encontrei dificuldade em modelar
+(como devo construir meu BD para que seja funcional?)
+
+- As classes já implementadas podem sofrer modificações (Inclusive, qualquer ideia
+ficaria grato de ser alertado)
+
+- O arquivo teste_classe serve justamente para testar a implementação do BD e
+das classes que já foram definidas. Peço que não alterem este arquivo no momento.
+Caso queiram fazer mais testes, por favor criar outro arquivo.
+
+- teste.db é o arquivo gerado pelo teste das classes e contem o BD.
+Você pode ter acesso a ele através de uma conexão (com SGBD fica fácil) para
+acessar os dados e executar SQL
+
+- Estarei entrando para desenvolver o restante no periodo noturno (Por volta de 18:00).
+Qualquer coisa só entrar em contato

@@ -1,4 +1,6 @@
 from peewee import *
+from funcionalidades.seguranca import *
+import os
 
 arquivo = "teste.db"
 db = SqliteDatabase(arquivo)
@@ -7,54 +9,88 @@ class BaseModel(Model):
     class Meta:
         database = db
 
-class Cliente(Model):
+class Local(BaseModel):
+    cidade = CharField(primary_key=True)
+    estado = CharField()
+    regiao = CharField()
+
+#Categoria -> Palavras Chaves
+class Categoria(BaseModel):
+    nome = CharField(primary_key=True)
+
+class Prato(BaseModel):
+    nome = CharField()
+    preco = FloatField()
+    descricao = CharField(null=True)
+    ingredientes = CharField(null=True)
+    #Dizer quando tal prato é ofertado no Restaurante
+    #To pensando em criar um padrao de String para armazenar isso
+    dia_periodo = CharField()
+    categorias = ManyToManyField(Categoria)
+
+class Bebida(BaseModel):
+    nome = CharField()
+    preco = FloatField()
+    descricao = CharField() #Colocar info de ml, Litros etc...
+    ingredientes = CharField(null=True)
+    #Dizer quando tal prato é ofertado no Restaurante
+    #To pensando em criar um padrao de String para armazenar isso
+    dia_periodo = CharField()
+    categorias = ManyToManyField(Categoria)
+
+#Contem os Pratos e Bebidas de um Estabelecimento
+class Cardapio(BaseModel):
+    pratos = ManyToManyField(Prato)
+    bebidas = ManyToManyField(Bebida)
+
+
+#class Agenda(BaseModel):
+#    vagas_livres = IntegerField()
+#    total_reservas = Integer(Field)
+#    regime = IntegerField()
+#    modelo = CharField()
+
+#class Data(BaseModel):
+#    dia = DateTime()
+#    horario_inicio = CharField()
+#    horario_termino = CharField()
+#    lotacao_maxima = IntegerField()
+#    permitir_reserva = BooleanField(default=False)
+#    agenda = ForeignKey(Agenda)
+#    reservas = ManyToMany(Reserva)
+
+class Cliente(BaseModel):
     cpf = CharField(primary_key=True, max_length=14)
     nome = CharField(max_length=100)
-    idade = IntegerField
+    idade = IntegerField()
     email = CharField()
     senha = CharField()
-    imagem = BlobField()
+    #imagem = BlobField()
     telefone = CharField()
     #local?
 
-class Estabelecimento(Model):
-    cnpj = CharField(primary_key=True, max_length=14)
-    nome_ficticio = CharField(max_length=100)
-    email = CharField()
-    senha = CharField()
-    imagem = BlobField()
-    telefone = CharField()
-    local = ForeignKeyField(Local)
-    agenada = ForeignKeyField(Agenda)
-    cardapio = ForeignKeyField(Cardapio)
+#class Estabelecimento(BaseModel):
+#    cnpj = CharField(primary_key=True, max_length=14)
+#    nome_ficticio = CharField(max_length=100)
+#    email = CharField()
+#    senha = CharField()
+    #imagem = BlobField()
+#    telefone = CharField()
+#    qtd_views = IntegerField()
+#    local = ForeignKeyField(Local)
+#    agenada = ForeignKeyField(Agenda)
+#    cardapio = ForeignKeyField(Cardapio)
 
-#Classe para representar os horários de atendimento, reservas já feitas,
-#Qtd máxima de pessoas etc...
-class Agenda(Model):
+#class Reserva(BaseModel):
+#    data_solicitacao = DateTimeField()
+#    cliente = ForeignKeyField(Cliente)
+#    qtd_pessoas = IntegerField()
+#    duracao = IntegerField()
+#    agenda = ForeignKeyField(Agenda)
+#    confirmacao = BooleanField(default=False)
+
+class Notificacao(BaseModel):
     pass
 
-#Contem os Pratos e Bebidas de um Estabelecimento
-class Cardapio(Model):
+class Ranking(BaseModel):
     pass
-
-class Prato(Model):
-    pass
-
-class Bebida(Model):
-    pass
-
-class Reserva(Model):
-    data = DateTimeField()
-    cliente = ForeignKeyField(Cliente)
-    agenda = ForeignKeyField(Agenda)
-    confirmacao = BooleanField(default=False)
-
-class Notificacao(Model):
-    pass
-
-class Ranking(Model):
-    pass
-
-class Local(Model):
-    cidade = CharField(primary_key=True)
-    estado = CharField()
