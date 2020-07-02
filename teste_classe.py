@@ -1,4 +1,5 @@
-from classes import *
+from funcionalidades.classes import *
+from funcionalidades.seguranca import gerar_senha
 from datetime import datetime
 
 try:

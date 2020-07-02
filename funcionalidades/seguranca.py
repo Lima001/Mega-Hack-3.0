@@ -4,9 +4,7 @@
 import hashlib
 import re
 
-#Necessita ser implementado
-#Usar RegEx
-
+#Acredito que ele não está funcionando corretamente... Temos que rever isso
 def cpf_valido(cpf:str) -> bool:
     if len(cpf) < 14:
         return False
@@ -74,7 +72,7 @@ def verificar_email(email:str, lista_email:object) -> bool:
     caso contrário retorna False
     '''
     for i in lista_email:
-        if i == email:
+        if i.email == email:
             return True
     return False
 
@@ -96,5 +94,33 @@ def verificar_senha(senha:str, padrao_hash:str) -> bool: #Testada e Funcional
     return senha == padrao_hash
 
 if __name__ == "__main__":
-    senha = cpf_valido(input("CPF: "))
-    print("Hash:", senha)
+    from classes import *
+
+    db.connect()
+
+    #Teste encriptar Senha
+    #Esperado: Uma senha ilegivel (Um hash)
+    minha_senha = "#MuitoDificilH@H@"
+    padrao_hash = gerar_senha(minha_senha)
+    print("1º Teste: ", padrao_hash, end="\n"*2)
+
+    #Teste verificar se Senha bate
+    #Esperado: True
+    print("2º Teste: ", verificar_senha(minha_senha, padrao_hash), end="\n"*2)
+
+    #Achar email no BD
+    #Esperado: True
+    emails = Estabelecimento.select(Estabelecimento.email)
+    print("3º Teste: ", verificar_email("ItaliaC.Contato@gmail.com",emails), end="\n"*2)
+
+    #Verificar se o email esta em formato valido
+    #Esperado: Depende conforme entrada (True or False)
+    seu_email = input("Digite um email valido: ")
+    print("4º Teste: ", email_valido(seu_email), end="\n"*2)
+
+    #Verificar cpf valido
+    #Esperado: Depende da entrada
+    #Valor de Teste 272.396.372-12 - Esperado True
+    print("5º Teste Valor Pré-definido: ", cpf_valido("272.396.372-12"))
+    seu_cpf = input("Digite um cpf valido: ")
+    print("5º Teste: ", cpf_valido(seu_cpf), end="\n"*2)

@@ -1,5 +1,4 @@
 from peewee import *
-from funcionalidades.seguranca import *
 import os
 
 arquivo = "teste.db"
