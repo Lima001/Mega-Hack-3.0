@@ -21,8 +21,11 @@ class Categoria(BaseModel):
 class Prato(BaseModel):
     nome = CharField()
     preco = FloatField()
+    imagem = BlobField(null=True)
     descricao = CharField(null=True)
     ingredientes = CharField(null=True)
+    #Dizer quando tal prato é ofertado no Restaurante
+    #To pensando em criar um padrao de String para armazenar isso
     dia_periodo = CharField()
     nota = FloatField(null=True)
     categorias = ManyToManyField(Categoria)
@@ -30,9 +33,10 @@ class Prato(BaseModel):
 class Bebida(BaseModel):
     nome = CharField()
     preco = FloatField()
-    descricao = CharField() #Colocar info de ml, Litros etc...
+    imagem = BlobField(null=True)
+    descricao = CharField(null=True)
     ingredientes = CharField(null=True)
-    #Dizer quando tal prato é ofertado no Restaurante
+    #Dizer quando tal bebida é ofertado no Restaurante
     #To pensando em criar um padrao de String para armazenar isso
     dia_periodo = CharField()
     nota = FloatField(null=True)
@@ -49,7 +53,7 @@ class Cliente(BaseModel):
     idade = IntegerField()
     email = CharField()
     senha = CharField()
-    #imagem = BlobField()
+    imagem = BlobField(null=True)
     telefone = CharField()
     #local = ForeignKeyField(Local)
 
@@ -58,7 +62,7 @@ class Estabelecimento(BaseModel):
     nome_ficticio = CharField(max_length=100)
     email = CharField()
     senha = CharField()
-    #imagem = BlobField()
+    imagem = BlobField(null=True)
     telefone = CharField()
     avaliacao = FloatField(null=True)
     qtd_visitas = IntegerField(default=0)
