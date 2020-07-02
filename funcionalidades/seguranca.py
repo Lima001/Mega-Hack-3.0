@@ -2,6 +2,7 @@
 # ser importadas e usadas na plataforma para verificar estabilidade dos dados
 
 import hashlib
+import re
 
 #Necessita ser implementado
 #Usar RegEx
@@ -18,7 +19,10 @@ def email_valido(email:str) -> bool:
     Retorna o valor lógico True em caso de sucesso, e 
     False em caso de erro  
     '''
-    pass
+    padrao = "^[a-z0-9]+[\._]?[a-z0-9]+[@]\w+[.]\w+$"
+    if re.search(padrao, email):
+        return True
+    return False
 
 #Necessário implementar BD para testar função
 def verificar_email(email:str, lista_email:object) -> bool:
