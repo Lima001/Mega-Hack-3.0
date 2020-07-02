@@ -12,10 +12,12 @@ def cpf_valido(cpf:str) -> bool:
 def cnpj_valido(cnpj:str) -> bool:
     pass
 
+#Testada - Funcional - (Parcialmente, pq não testei todo tipo de email)
+# Se quiserem testar alguns formatos...
 def email_valido(email:str) -> bool: 
     '''
     Verifica se a cadeia de caracteres passada como entrada
-    consiste em um formato válido do tipo ...@gmail.com
+    consiste em um formato válido do tipo ... @ ... .com
     Retorna o valor lógico True em caso de sucesso, e 
     False em caso de erro  
     '''
@@ -36,7 +38,8 @@ def verificar_email(email:str, lista_email:object) -> bool:
             return True
     return False
 
-def gerar_senha(senha:str) -> str: #Testada e funcional
+#Testada - Funcional
+def gerar_senha(senha:str) -> str:
     '''
     Retorna o hash da senha passada como entrada para eventual gravação na base de dados
     '''
@@ -44,7 +47,8 @@ def gerar_senha(senha:str) -> str: #Testada e funcional
     gerador.update(senha.encode("utf-8"))
     return gerador.hexdigest()
 
-def verificar_senha(senha:str, padrao_hash:str) -> bool: #Testada e Funcional
+#Testada - Funcional
+def verificar_senha(senha:str, padrao_hash:str) -> bool:
     '''
     Verifica se a senha informada confere com o hash passado (Pegar hash da base de dados)
 
