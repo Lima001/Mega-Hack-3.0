@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <title>Food Network</title>
+    <meta charset="uft-8">
+    <link rel="icon" href="static/logo.png" type="image/png"/>
+    <style>
+        *{
+            background-color: #EEE9E9;
+            outline: none;
+            border-radius: 4px;
+            padding: 0.8% 0.8% 0.8% 0.8%;
+            font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+        h1{
+            color: #EE2C2C;
+            text-align: left;
+            margin-top: 0;
+            margin-left: 10%;
+            margin-bottom: 5%;
+            font-size: 200%;
+        }
+        h2{
+            color: #000010;
+            text-align: left;
+            margin-left: 14%;
+            font-size: 150%;
+        }
+        h3{
+            color: #000010;
+            text-align: left;
+            margin-left: 33%;
+            width: 78%;
+        }
+        button{
+            border-radius: 4px;
+            border-style: hidden;
+            border-color: #EE2C2C;
+            background-color: #EE2C2C;
+            color: #EEE9F0;
+            width: 25%;
+            font-size: 90%;
+            font-weight: bold;
+            margin-bottom: 1%;
+        }
+        button:hover{
+            background-color: #CD2626;
+            color: #8a8a88;
+        }
+        input, select{
+            margin-top: -10%;
+            width: 50%;
+            text-align: left;
+            border-radius: 4%;
+            border-style:solid;
+            border-color: #F7F7F7;
+            background-color: #F7F7F7;
+            margin-bottom: 2%;
+        }
+        input:focus {
+            border-color:#B5B5B5;
+        }
+        select{
+            width: 24%;
+        }
+        
+        form{
+            text-align: left;
+
+        }
+
+        form button{
+            display:block;
+            margin-left: 32%;
+            width: 38%;
+        }
+
+        form input{
+            width: 22%;
+        }
+        form label{
+            color: #000010;
+            background-color: #CDC9C9;
+            font-weight: bold;
+            font-size: 120%;
+        }
+        form h3{
+            margin-left: 20%;
+        }
+        li{
+            margin-top: -5%;
+            margin-left: 8%;
+            list-style:none;
+            word-spacing: 2%;
+            display: inline-block;
+            position: relative;
+            text-align: left;
+            
+        }
+        a{
+            text-decoration: none;
+        }
+        #links h3{
+            color: #8B8989;
+        }
+        #links h3:hover{
+            color: #6e6b6b;
+        }
+        #menu{
+            margin-left: 2%;
+        }
+        #perfil h3, h4{
+            margin-left: 14%;
+        }
+        #perfil h3, h4, p{
+            display: inline;
+            background-color: #CDC9C9;
+            border-radius: 0;
+            padding-top: 0;
+            margin-bottom: 20px;
+        }
+        #formRest, #formCliente{
+            background-color: #CDC9C9;
+            width: 60%;
+            padding: 5%;
+            margin-left: 13%;
+            padding-bottom: 5%;
+            text-align: center;
+        }
+        .page{display: none;}
+        .hide { display: none;}
+        .backDiv{
+            background-color: #CDC9C9;
+            width: 60%;
+            padding: 5%;
+            margin-left: 13%;
+            text-align: center;
+        }
+        .backDiv input[type=number]{
+            width: 5%;
+        }
+        .divResult{
+            background-color: #CDC9C9;
+            width: 60%;
+            height: 80%;
+            padding: 5%;
+            padding-bottom: 10%;
+            font-size: 90%;
+            margin-left: 13%;
+            text-align: left;
+        }
+        .divResult img{
+            float: left;
+        }
+        .divResult button{
+            margin-top: 10%;
+            float: right;
+        }
+
+        .divResult h3, p{
+            background-color: #CDC9C9;
+            border-radius: 0;
+            padding-top: 0;
+            margin-bottom: 0;
+            margin-left: 0;
+            display: inline;
+        }
+        .cadastro{ 
+            position: relative;
+            text-align: left;
+            flex: 1;
+        }
+        .cadastro button{
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }       
+        @media (max-width: 550px){
+            .cadastro{
+            grid-template-columns: 1fr; 
+            }
+        }
+    </style>
+    <script
+        src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+  
+   <script >
+            //Quando o documento estiver pronto
+        $(document).ready(function() {
+            
+            //Função que mostra o conteúdo de acordo com o botão clicado
+            $("#links li a").on('click', function(e) {
+                e.preventDefault();
+                var page = $(this).data('page');
+                $("#pages .page:not('.hide')").stop().fadeOut('fast', function() {
+                    $(this).addClass('hide');
+                    $('#pages .page[data-page="'+page+'"]').fadeIn('slow').removeClass('hide');
+                });
+                document
+                .querySelector('#restaurante')
+                .addEventListener("click", function(){
+                    document
+                    .querySelector('#formRest')
+                    .classList.toggle('hide')
+                });
+                document
+                .querySelector('#cliente')
+                .addEventListener("click", function(){
+                    document
+                    .querySelector('#formCliente')
+                    .classList.toggle('hide')
+                })
+        
+            });
+            
+            //Função que insere a classe Active no botão que foi clicado
+            $("#menu li").on('click', function(){
+                $(this).siblings().removeClass('active');
+                $(this).addClass('active');
+            });
+        });
+   </script>
+  
+</head> 
+<body>
+    <div id="menu"> 
+        <ul id="links">
+            <div>
+            <img src="static/logo.png" style="width: 70px;float: left; margin-left: 10%;">
+            <h1 style="margin-top: 2%;">FOOD NETWORK</h1>
+            </div>
+            <hr style="background-color: #EE2C2C; padding: 1px; width: 72%; margin-left: 11%;">
+            <br>
+            <br>
+            <br>
+            <li><a data-page="pesquisa" href="#"><h3> Pesquisar</h3> </a></li>
+            <!--{%if usuario == False%}-->
+            <li><a data-page="cadastro" href="#"><h3> Cadastrar </h3></a></li>
+            <li><a data-page="login" href="#"><h3> Login </h3></a> </li>
+            <!--{%else%}-->
+            <li><a data-page="perfil" href="#"><h3> Perfil </h3></a></li>
+            <li><a data-page="reservar" href="#"><h3> Reservar </h3></a></li>
+            <!--{%endif%} -->
+        </ul>
+    </div>
+    <div id="pages">
+        <section id="cadastro" class="page" data-page="cadastro">
+            <h2>Cadastrar-me como...</h2>
+            <br>
+            <button id="restaurante" style="margin-left: 15%;"> Restaurante </button>
+            <button id="cliente"> Cliente </button>
+
+            <form id="formRest" class="hide">
+                <h2>Cadastrar-me como Restaurante</h2>
+                <label>Nome</label><input type="text" style="margin-right: -30px;"/>
+                <br>
+                <label>CNPJ</label><input type="number" style="margin-right: -40px;"/>
+                <br>
+                <label>Telefone</label><input type="tel" style="margin-right: -9px;"/> 
+                <br>
+                <h3>Endereço</h3>
+                <br>
+                <label>Estado</label><SELECT name = "selecionarEstado" style="margin-right: -32px;">
+                    <option selected value="ac">Acre</option> 
+                    <option selected value="al">Alagoas</option> 
+                    <option selected value="am">Amazonas</option> 
+                    <option selected value="ap">Amapá</option> 
+                    <option selected value="ba">Bahia</option> 
+                    <option selected value="ce">Ceará</option> 
+                    <option selected value="df">Distrito Federal</option> 
+                    <option selected value="es">Espírito Santo</option> 
+                    <option selected value="go">Goiás</option> 
+                    <option selected value="ma">Maranhão</option> 
+                    <option selected value="mt">Mato Grosso</option> 
+                    <option selected value="ms">Mato Grosso do Sul</option> 
+                    <option selected value="mg">Minas Gerais</option> 
+                    <option selected value="pa">Pará</option> 
+                    <option selected value="pb">Paraíba</option> 
+                    <option selected value="pr">Paraná</option> 
+                    <option selected value="pe">Pernambuco</option> 
+                    <option selected value="pi">Piauí</option> 
+                    <option selected value="rj">Rio de Janeiro</option> 
+                    <option selected value="rn">Rio Grande do Norte</option> 
+                    <option selected value="ro">Rondônia</option> 
+                    <option selected value="rs">Rio Grande do Sul</option> 
+                    <option selected value="rr">Roraima</option> 
+                    <option selected value="sc">Santa Catarina</option> 
+                    <option selected value="se">Sergipe</option> 
+                    <option selected value="sp">São Paulo</option> 
+                    <option selected value="to">Tocantins</option> 
+                 </SELECT>
+                <br>
+                <label>Cidade</label><input type="text" style="margin-right: -30px;"/> 
+                <br>
+                <label>Bairro</label><input type="text" style="margin-right: -38px;"/> 
+                <br>
+                <label>Rua</label><input type="text" style="margin-right: -55px;"/>
+                <br>
+                <h3>Funcionamento</h3>
+                <br>
+                <label>Das</label><input type="time"/> <label>até</label><input type="time"/> 
+                <br>
+                <label>De</label>
+                <SELECT name = "selecionarInicio">
+                    <OPTION selected value = "segunda"> Segunda </OPTION>
+                    <OPTION selected value = "terca"> Terça </OPTION>
+                    <OPTION selected value = "quarta"> Quarta </OPTION>
+                    <OPTION selected value = "quinta"> Quinta </OPTION>
+                    <OPTION selected value = "sexta"> Sexta </OPTION>
+                    <OPTION selected value = "sabado"> Sábado </OPTION>
+                    <OPTION selected value = "domingo"> Domingo </OPTION>
+                 </SELECT> <label>à</label>
+                 <SELECT name = "selecionarFim">
+                    <OPTION selected value = "segunda"> Segunda </OPTION>
+                    <OPTION selected value = "terca"> Terça </OPTION>
+                    <OPTION selected value = "quarta"> Quarta </OPTION>
+                    <OPTION selected value = "quinta"> Quinta </OPTION>
+                    <OPTION selected value = "sexta"> Sexta </OPTION>
+                    <OPTION selected value = "sabado"> Sábado </OPTION>
+                    <OPTION selected value = "domingo"> Domingo </OPTION>
+                </SELECT>
+                <br>
+                <br>
+                <h3>Dados para Login</h3>
+                <br>
+                <label>Usuário</label><input type="text" style="margin-left: 5px;"/>
+                <br>
+                <label>Senha</label><input type="password" style="margin-left: 15px;"/>
+                <br>
+                <br>
+                <button>Registrar</button>
+            </form>
+            <br>
+            <form id="formCliente" class="hide">
+                <h2>Cadastrar-me como Cliente</h2>
+                <label>Nome</label><input type="text" style="margin-right: -20px;"/>
+                <br>
+                <label>CPF</label><input type="number" style="margin-right: -38px; width: 22%;"/>
+                <br>
+                <label>Telefone</label><input type="tel"/> 
+                <br>
+                <h3>Dados para Login</h3>
+                <br>
+                <label>Usuário</label><input type="text" style="margin-left: 5px;"/>
+                <br>
+                <label>Senha</label><input type="password" style="margin-left: 15px;"/>
+                <br>
+                <br>
+                <button>Registrar</button>
+            </form>
+        </section>
+        <section id="login" class="page hide" data-page="login">
+            <form class="backDiv">
+                <label>Usuário</label><input type="text"/>
+                <br>
+                <label>Senha</label><input type="password" style="margin-left: 11px;"/>
+                
+                <button>Log In</button>
+            </form>
+        </section>
+        <section id="pesquisa" class="page hide" data-page="pesquisa">
+            <div class="backDiv">
+                <input type="text" id="txtBusca" placeholder="Pesquisar Restaurante..."/>
+                <button style="font-size: 85%;" type="submit" >Pesquisar</button>
+            </div>
+            <br>
+            <div class="divResult">
+                <img src="static/mortadella.jpg" style="width: 33%; height: 37%; border-radius: 20px;"/>
+                <h2 style="background-color: #CDC9C9; margin-left: 0; margin-top: 0; margin-bottom: 0;">Mortadella</h2>
+                <br>
+                <br>
+                <h3>CNPJ:</h3><p>94898526756</p>
+                <br>
+                <h3>Telefone:</h3><p>472392192192</p>
+                <br>
+                <h3>Estado:</h3><p>SC</p><h3>Cidade:</h3><p>Blumenau</p>
+                <br>
+                <h3>Bairro:</h3><p>Sla</p><br><h3>Rua:</h3><p>hdfyfhdhdhu</p>
+                <button>Reservar</button>
+            </div>
+            <br>
+            <div class="divResult">
+                <img src="static/mortadella.jpg" style="width: 33%; height: 37%; border-radius: 20px;"/>
+                <h2 style="background-color: #CDC9C9; margin-top: 0; margin-bottom: 0;">Mortadella</h2>
+                <br>
+                <br>
+                <h3>CNPJ:</h3><p>94898526756</p>
+                <br>
+                <h3>Telefone:</h3><p>472392192192</p>
+                <br>
+                <h3>Estado:</h3><p>SC</p><h3>Cidade:</h3><p>Blumenau</p>
+                <br>
+                <h3>Bairro:</h3><p>Sla</p><br><h3>Rua:</h3><p>hdfyfhdhdhu</p>
+                <button>Reservar</button>
+            </div>
+        </section>
+        <section id="perfil" class="page hide" data-page="perfil">
+            <div class="backDiv" style="text-align: left;">
+                <a href="/logout" style="background-color: #CDC9C9;"><img src="static/out.png" style="width: 20px; height: 20px; text-align: center; float: right;"></a>
+                <br>
+                <img src="static/perfil_vazio.webp" style="border-radius: 50%; width: 100px; height: 100px;"/>
+                <h2 style="background-color: #CDC9C9; ">Nome Pessoa</h2>
+                <h3>CPF/CNPJ:</h3><p>94898526756</p>
+                <br>
+                <!--SE FOR RESTAURANTE, MOSTRAR ENDEREÇO. TITULO EM H3 E INFORMAÇÃO EM P, COMO MODELO ABAIXO-->
+                <h3>Telefone:</h3><p>472392192192</p>
+                <br>
+                <h3>Reservas:</h3><p>QUANTIDADE AQUI</p> <!--vale para ambos os perfis-->
+                <br>
+                <hr style="padding-bottom: 0; padding-top:0.5;">
+                <h4>Restaurante Mortadella</h4>
+                <br>
+                <h4>Dia:</h4><p>03/08/2020</p>
+                <br>
+                <h4>Horário:</h4><p>14:00:00</p>
+                <br>
+                <h4>Mesa para:</h4><p>5</p>
+                <br>
+                <h4>Pratos:</h4><p>10</p><br><h4>Bebidas:</h4><p>5</p>
+                <hr style="padding-bottom: 0; padding-top:0.5;">
+            </div>
+        </section>
+
+        <section id="reservar" class="page hide" data-page="reservar">
+            <form class="backDiv">
+                <h2 style="width: 70%;">Efetuar Reserva</h2>
+                <label>Usuário</label><input type="text" style="margin-left: 35px;"/> <!--PEGA NOME USER ATUAL-->
+                <br>
+                <label>Restaurante</label><input type="text"/>
+                <br>
+                <label>Dia</label><input type="date" style="margin-left: 68px;"/>
+                <br>
+                <label>Horário</label><input type="time" style="margin-left: 33px;"/>
+                <br>
+                <label>Mesa para</label><input type="number"/><label>pessoa(s)</label>
+                <br>
+                <label>Pratos</label><input type="number"/>
+                <label>Bebidas</label><input type="number"/>
+                <button>Reservar</button>
+            </form>
+        </section>
+        
+    </div>
+        
+        
+        
+         
+        <!--ao clicar em efetuar cadastro, o usuário escolherá: cadastrar como empresa ou como cliente-->
+        <!--após selecionar a opção, vai direcionar pro formulário escolhido-->
+        <!--uma empresa só poderá se cadastrar com cnpj existente e um cliente com seu cpf-->
+        
+    </div> 
+    <br> 
+    <br>
+</body>
+</html>
