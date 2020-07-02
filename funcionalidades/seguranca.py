@@ -34,11 +34,10 @@ def verificar_email(email:str, lista_email:object) -> bool:
     caso contrário retorna False
     '''
     for i in lista_email:
-        if i == email:
+        if i.email == email:
             return True
     return False
 
-#Testada - Funcional
 def gerar_senha(senha:str) -> str:
     '''
     Retorna o hash da senha passada como entrada para eventual gravação na base de dados
@@ -47,7 +46,6 @@ def gerar_senha(senha:str) -> str:
     gerador.update(senha.encode("utf-8"))
     return gerador.hexdigest()
 
-#Testada - Funcional
 def verificar_senha(senha:str, padrao_hash:str) -> bool:
     '''
     Verifica se a senha informada confere com o hash passado (Pegar hash da base de dados)
@@ -56,7 +54,3 @@ def verificar_senha(senha:str, padrao_hash:str) -> bool:
     '''
     senha = gerar_senha(senha)
     return senha == padrao_hash
-
-if __name__ == "__main__":
-    senha = gerar_senha(input("Digite uma senha: "))
-    print("Hash:", senha)

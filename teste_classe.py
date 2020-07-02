@@ -1,7 +1,6 @@
 from classes import *
 from datetime import datetime
 
-
 try:
     os.system("cls")
 
