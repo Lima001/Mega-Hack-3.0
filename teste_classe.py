@@ -121,6 +121,7 @@ bebida2 = Bebida.create(
     descricao="500ml",
     ingrediente="20ml de Puro Alcool",
     dia_periodo = "246-3",
+    avaliacao = 5.0,
     estabelecimento = estabelecimento2
 )
 

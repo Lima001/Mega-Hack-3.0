@@ -35,38 +35,40 @@ def filtrar_estabelecimento_por_agenda(estabelecimentos, dias="1234567"):
         resultado.append(i.estabelecimento)
     return resultado
 
-#Busca e filtro por Pratos
+#Busca e filtro por Pratos e Bebidas
 def buscar_prato_por_nome(nome):
     nome = f"%{nome}%"
     resultado = Prato.select().where(Prato.nome**nome)
     return list(resultado)
 
-def filtrar_prato_por_categoria(pratos, categorias):
+def buscar_bebida_por_nome(nome):
+    nome = f"%{nome}%"
+    resultado = Bebida.select().where(Bebida.nome**nome)
+    return list(resultado)
+
+def filtrar_por_categoria(objetos, categorias):
     resultado = []
-    for i in pratos:
+    for i in objetos:
         for j in i.categorias:
             if j.nome in categorias:
                 resultado.append(i)
                 break
     return resultado
 
-def filtrar_prato_por_avaliacao(pratos, nota_min=0, nota_max=10):
+def filtrar_por_avaliacao(objetos, nota_min=0, nota_max=10):
     resultado = []
-    for i in pratos:
+    for i in objetos:
         if i.avaliacao is not None:
             if i.avaliacao >= nota_min and i.avaliacao <= nota_max:
                 resultado.append(i)
     return resultado
 
-def filtrar_prato_por_preco(pratos, preco_min=0, preco_max=100000):
+def filtrar_por_preco(objetos, preco_min=0, preco_max=100000):
     resultado = []
-    for i in pratos:
+    for i in objetos:
         if i.preco >= preco_min and i.preco <= preco_max:
             resultado.append(i)
     return resultado
-
-#Posso implementar para bebidas tbm
-#É bem de boa, até pq é quase copia e cola dos pratos
 
 if __name__ == "__main__":
     db.connect()
@@ -91,6 +93,18 @@ if __name__ == "__main__":
     for i in resultado:
         print(i.nome)
     
-    print(filtrar_prato_por_categoria(resultado,["frito","caseiro"]))
-    print(filtrar_prato_por_avaliacao(resultado,8))
-    print(filtrar_prato_por_preco(resultado,preco_max=5))
+    print(filtrar_por_categoria(resultado,["frito","caseiro"]))
+    print(filtrar_por_avaliacao(resultado,8))
+    print(filtrar_por_preco(resultado,preco_max=5))
+
+    print("-"*35)
+
+    #Teste funções bebidas
+    resultado = buscar_bebida_por_nome("a")
+    print(resultado)
+    for i in resultado:
+        print(i.nome)
+    
+    print(filtrar_por_categoria(resultado,["Alcool","caseiro"]))
+    print(filtrar_por_avaliacao(resultado,4.5))
+    print(filtrar_por_preco(resultado,preco_max=5))
