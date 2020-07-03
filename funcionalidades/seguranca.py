@@ -54,7 +54,61 @@ def cpf_valido(cpf:str) -> bool:
 
 
 def cnpj_valido(cnpj:str) -> bool:
-    pass
+    lista = []
+    for i in cnpj:
+        lista.append(i)
+
+
+    try:
+        lista.remove(".")
+        lista.remove(".")
+        lista.remove("/")
+        lista.remove("-")
+    except:
+        pass 
+
+    # primeira etapa
+    soma = 0
+    cont = 6
+    for i in range(0,len(lista)-2):
+        cont -= 1
+        soma += int(lista[i]) * cont
+        if cont == 2:
+            cont = 10
+
+    resto = soma % 11
+    if resto < 2:
+        resto = 0
+    else:
+        resto = 11 - resto
+
+    digito1 = False
+    if resto == int(lista[-2]):
+        digito1 = True
+
+
+    soma = 0
+    cont = 7
+    for i in range(0,len(lista)-1):
+        cont -= 1
+        soma += int(lista[i]) * cont
+        if cont == 2:
+            cont = 10
+
+    resto = soma % 11
+    if resto < 2:
+        resto = 0
+    else:
+        resto = 11 - resto
+
+    digito2 = False
+    if resto == int(lista[-1]):
+        digito2 = True
+
+    if digito1 == True and digito2 == True:
+        return True   
+    else: 
+        return False
 
 def email_valido(email:str) -> bool: 
     '''
