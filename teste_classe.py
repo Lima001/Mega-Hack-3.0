@@ -80,7 +80,8 @@ prato3 = Prato.create(
     nome="Salmão Defunado Italiano",
     preco=50.00,
     descricao="Tradicional Prato Italiano com toque Brasileiro",
-    dia_periodo = "246-13"
+    dia_periodo = "246-13",
+    avaliacao = 8
 )
 
 prato1.categorias.add([categoria2,categoria4])
@@ -106,16 +107,6 @@ bebida2 = Bebida.create(
 bebida1.categorias.add([categoria5])
 bebida2.categorias.add([categoria5,categoria6])
 
-
-cardapio_restaurante1 = Cardapio.create()
-cardapio_restaurante2 = Cardapio.create()
-
-cardapio_restaurante1.pratos.add([prato1,prato2])
-cardapio_restaurante1.bebidas.add(bebida1)
-cardapio_restaurante2.pratos.add(prato3)
-cardapio_restaurante2.bebidas.add(bebida2)
-
-
 local1 = Local.create(cidade="Pommerland",estado="Absoluto",regiao="Alemanha Ocidental")
 
 estabelecimento1 = Estabelecimento.create(
@@ -125,7 +116,6 @@ estabelecimento1 = Estabelecimento.create(
     senha = gerar_senha("UmBarZinL@G@L"),
     telefone = "3332-1212",
     local = local1,
-    cardapio = cardapio_restaurante1
 )
 estabelecimento2 = Estabelecimento.create(
     cnpj = "45.128.959/1001-89",
@@ -134,9 +124,16 @@ estabelecimento2 = Estabelecimento.create(
     senha = gerar_senha("#AlgumaFraseEmItaliano"),
     telefone = "99932-1522",
     local = local1,
-    cardapio = cardapio_restaurante2
+    avaliacao = 9.5
 )
 
+cardapio_restaurante1 = Cardapio.create(estabelecimento=estabelecimento1)
+cardapio_restaurante2 = Cardapio.create(estabelecimento=estabelecimento2)
+
+cardapio_restaurante1.pratos.add([prato1,prato2])
+cardapio_restaurante1.bebidas.add(bebida1)
+cardapio_restaurante2.pratos.add(prato3)
+cardapio_restaurante2.bebidas.add(bebida2)
 
 #Agenda Restaurante 1
 agenda1 = Agenda.create(

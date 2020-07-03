@@ -26,7 +26,7 @@ class Prato(BaseModel):
     #Dizer quando tal prato é ofertado no Restaurante
     #To pensando em criar um padrao de String para armazenar isso
     dia_periodo = CharField()
-    nota = FloatField(null=True)
+    avaliacao = FloatField(null=True)
     categorias = ManyToManyField(Categoria)
 
 class Bebida(BaseModel):
@@ -40,11 +40,6 @@ class Bebida(BaseModel):
     dia_periodo = CharField()
     nota = FloatField(null=True)
     categorias = ManyToManyField(Categoria)
-
-#Contem os Pratos e Bebidas de um Estabelecimento
-class Cardapio(BaseModel):
-    pratos = ManyToManyField(Prato)
-    bebidas = ManyToManyField(Bebida)
 
 class Cliente(BaseModel):
     cpf = CharField(primary_key=True, max_length=14)
@@ -67,8 +62,12 @@ class Estabelecimento(BaseModel):
     qtd_visitas = IntegerField(default=0)
     operando = BooleanField(default=True)
     local = ForeignKeyField(Local)
-    cardapio = ForeignKeyField(Cardapio)
 
+#Contem os Pratos e Bebidas de um Estabelecimento
+class Cardapio(BaseModel):
+    pratos = ManyToManyField(Prato)
+    bebidas = ManyToManyField(Bebida)
+    estabelecimento = ForeignKeyField(Estabelecimento)
 
 class Reserva(BaseModel):
     data_requisicao = DateTimeField()
