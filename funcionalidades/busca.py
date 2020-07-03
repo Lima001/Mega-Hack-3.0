@@ -15,7 +15,7 @@ def buscar_estabelecimento_por_nome(nome):
 def filtrar_estabelecimento_por_cidade(estabelecimentos, lista_cidade):
     resultado = []
     for i in estabelecimentos:
-        if i.local.cidade in lista_cidade:
+        if i.local in lista_cidade:
             resultado.append(i)
     return resultado
 
@@ -77,7 +77,7 @@ if __name__ == "__main__":
     resultado = buscar_estabelecimento_por_nome("a") 
     print(resultado)
     for i in resultado:
-        print(i.local.cidade)
+        print(i.local)
     
     print(filtrar_estabelecimento_por_cidade(resultado,["Pommerland"]))
     print(filtrar_estabelecimento_por_avaliacao(resultado,5))

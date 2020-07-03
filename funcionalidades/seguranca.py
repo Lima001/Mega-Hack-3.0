@@ -122,18 +122,6 @@ def email_valido(email:str) -> bool:
         return True
     return False
 
-#Necessário implementar BD para testar função
-def verificar_email(email:str, lista_email:object) -> bool:
-    '''
-    Verifica se o email informado está presente na base de dados (Objeto retornado pela Consulta Peewee)
-    Retorna um valor Lógico True caso o email corresponda a lista de email salvos, 
-    caso contrário retorna False
-    '''
-    for i in lista_email:
-        if i.email == email:
-            return True
-    return False
-
 def gerar_senha(senha:str) -> str: #Testada e funcional
     '''
     Retorna o hash da senha passada como entrada para eventual gravação na base de dados
@@ -166,19 +154,14 @@ if __name__ == "__main__":
     #Esperado: True
     print("2º Teste: ", verificar_senha(minha_senha, padrao_hash), end="\n"*2)
 
-    #Achar email no BD
-    #Esperado: True
-    emails = Estabelecimento.select(Estabelecimento.email)
-    print("3º Teste: ", verificar_email("ItaliaC.Contato@gmail.com",emails), end="\n"*2)
-
     #Verificar se o email esta em formato valido
     #Esperado: Depende conforme entrada (True or False)
     seu_email = input("Digite um email valido: ")
-    print("4º Teste: ", email_valido(seu_email), end="\n"*2)
+    print("3º Teste: ", email_valido(seu_email), end="\n"*2)
 
     #Verificar cpf valido
     #Esperado: Depende da entrada
     #Valor de Teste 272.396.372-12 - Esperado True
-    print("5º Teste Valor Pré-definido: ", cpf_valido("272.396.372-12"))
+    print("4º Teste Valor Pré-definido: ", cpf_valido("272.396.372-12"))
     seu_cpf = input("Digite um cpf valido: ")
     print("5º Teste: ", cpf_valido(seu_cpf), end="\n"*2)

@@ -20,10 +20,6 @@ try:
         Bebida,
         Prato.categorias.get_through_model(),
         Bebida.categorias.get_through_model(),
-        Cardapio,
-        Cardapio.pratos.get_through_model(),
-        Cardapio.bebidas.get_through_model(),
-        Local,
         Estabelecimento,
         Agenda,
         Reserva,
@@ -62,18 +58,39 @@ categoria4 = Categoria.create(nome="caseiro")
 categoria5 = Categoria.create(nome="doce")
 categoria6 = Categoria.create(nome="Alcool")
 
+
+estabelecimento1 = Estabelecimento.create(
+    cnpj = "42.318.949/0001-84",
+    nome_ficticio = "BarzinDelusch",
+    email = "BarzinDeluxe321@gmail.com",
+    senha = gerar_senha("UmBarZinL@G@L"),
+    telefone = "3332-1212",
+    local = "Pommerland",
+)
+estabelecimento2 = Estabelecimento.create(
+    cnpj = "45.128.959/1001-89",
+    nome_ficticio = "ItaliCassiolla",
+    email = "ItaliaC.Contato@gmail.com",
+    senha = gerar_senha("#AlgumaFraseEmItaliano"),
+    telefone = "99932-1522",
+    local = "Pommerland",
+    avaliacao = 9.5,
+)
+
 prato1 = Prato.create(
     nome="Pastel",
     preco=4.50,
     descricao="Pastel Gostoso e Cremoso",
     ingrediente="Massa de Pastel e Recheio de Carne",
-    dia_periodo = "123456-3"
+    dia_periodo = "123456-3",
+    estabelecimento = estabelecimento1
 )
 
 prato2 = Prato.create(
     nome="Bolinho de Carne",
     preco=3.50,
-    dia_periodo = "123456-3"
+    dia_periodo = "123456-3",
+    estabelecimento = estabelecimento1
 )
 
 prato3 = Prato.create(
@@ -81,7 +98,8 @@ prato3 = Prato.create(
     preco=50.00,
     descricao="Tradicional Prato Italiano com toque Brasileiro",
     dia_periodo = "246-13",
-    avaliacao = 8
+    avaliacao = 8,
+    estabelecimento = estabelecimento2
 )
 
 prato1.categorias.add([categoria2,categoria4])
@@ -93,7 +111,8 @@ bebida1 = Bebida.create(
     nome="Toddy Radical",
     preco=2.50,
     descricao="600ml",
-    dia_periodo = "123456-123"
+    dia_periodo = "123456-123",
+    estabelecimento = estabelecimento1
 )
 
 bebida2 = Bebida.create(
@@ -101,39 +120,12 @@ bebida2 = Bebida.create(
     preco=14.50,
     descricao="500ml",
     ingrediente="20ml de Puro Alcool",
-    dia_periodo = "246-3"
+    dia_periodo = "246-3",
+    estabelecimento = estabelecimento2
 )
 
 bebida1.categorias.add([categoria5])
 bebida2.categorias.add([categoria5,categoria6])
-
-local1 = Local.create(cidade="Pommerland",estado="Absoluto",regiao="Alemanha Ocidental")
-
-estabelecimento1 = Estabelecimento.create(
-    cnpj = "42.318.949/0001-84",
-    nome_ficticio = "BarzinDelusch",
-    email = "BarzinDeluxe321@gmail.com",
-    senha = gerar_senha("UmBarZinL@G@L"),
-    telefone = "3332-1212",
-    local = local1,
-)
-estabelecimento2 = Estabelecimento.create(
-    cnpj = "45.128.959/1001-89",
-    nome_ficticio = "ItaliCassiolla",
-    email = "ItaliaC.Contato@gmail.com",
-    senha = gerar_senha("#AlgumaFraseEmItaliano"),
-    telefone = "99932-1522",
-    local = local1,
-    avaliacao = 9.5
-)
-
-cardapio_restaurante1 = Cardapio.create(estabelecimento=estabelecimento1)
-cardapio_restaurante2 = Cardapio.create(estabelecimento=estabelecimento2)
-
-cardapio_restaurante1.pratos.add([prato1,prato2])
-cardapio_restaurante1.bebidas.add(bebida1)
-cardapio_restaurante2.pratos.add(prato3)
-cardapio_restaurante2.bebidas.add(bebida2)
 
 #Agenda Restaurante 1
 agenda1 = Agenda.create(

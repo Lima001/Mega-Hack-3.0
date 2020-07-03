@@ -8,43 +8,14 @@ class BaseModel(Model):
     class Meta:
         database = db
 
-class Local(BaseModel):
-    cidade = CharField()
-    estado = CharField()
-    regiao = CharField()
-
 #Categoria -> Palavras Chaves
 class Categoria(BaseModel):
     nome = CharField(primary_key=True)
 
-class Prato(BaseModel):
-    nome = CharField()
-    preco = FloatField()
-    imagem = BlobField(null=True)
-    descricao = CharField(null=True)
-    ingredientes = CharField(null=True)
-    #Dizer quando tal prato é ofertado no Restaurante
-    #To pensando em criar um padrao de String para armazenar isso
-    dia_periodo = CharField()
-    avaliacao = FloatField(null=True)
-    categorias = ManyToManyField(Categoria)
-
-class Bebida(BaseModel):
-    nome = CharField()
-    preco = FloatField()
-    imagem = BlobField(null=True)
-    descricao = CharField(null=True)
-    ingredientes = CharField(null=True)
-    #Dizer quando tal bebida é ofertado no Restaurante
-    #To pensando em criar um padrao de String para armazenar isso
-    dia_periodo = CharField()
-    nota = FloatField(null=True)
-    categorias = ManyToManyField(Categoria)
-
 class Cliente(BaseModel):
     cpf = CharField(primary_key=True, max_length=14)
     nome = CharField(max_length=100)
-    idade = IntegerField()
+    idade = IntegerField(null=True)
     email = CharField()
     senha = CharField()
     imagem = BlobField(null=True)
@@ -54,20 +25,36 @@ class Cliente(BaseModel):
 class Estabelecimento(BaseModel):
     cnpj = CharField(primary_key=True, max_length=18)
     nome_ficticio = CharField(max_length=100)
-    email = CharField()
+    email = CharField(unique=True)
     senha = CharField()
     imagem = BlobField(null=True)
     telefone = CharField()
     avaliacao = FloatField(null=True)
     qtd_visitas = IntegerField(default=0)
     operando = BooleanField(default=True)
-    local = ForeignKeyField(Local)
+    local = CharField()
 
-#Contem os Pratos e Bebidas de um Estabelecimento
-class Cardapio(BaseModel):
-    pratos = ManyToManyField(Prato)
-    bebidas = ManyToManyField(Bebida)
+class Prato(BaseModel):
+    nome = CharField()
+    preco = FloatField()
+    imagem = BlobField(null=True)
+    descricao = CharField(null=True)
+    ingredientes = CharField(null=True)
+    dia_periodo = CharField(null=True)
+    avaliacao = FloatField(null=True)
     estabelecimento = ForeignKeyField(Estabelecimento)
+    categorias = ManyToManyField(Categoria)
+
+class Bebida(BaseModel):
+    nome = CharField()
+    preco = FloatField()
+    imagem = BlobField(null=True)
+    descricao = CharField(null=True)
+    ingredientes = CharField(null=True)
+    dia_periodo = CharField(null=True)
+    avaliacao = FloatField(null=True)
+    estabelecimento = ForeignKeyField(Estabelecimento)
+    categorias = ManyToManyField(Categoria)
 
 class Reserva(BaseModel):
     data_requisicao = DateTimeField()
