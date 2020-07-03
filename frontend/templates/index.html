@@ -60,6 +60,10 @@
         input:focus {
             border-color:#B5B5B5;
         }
+        input[type=file]{
+            width: 43%;
+            margin-right: -50px;
+        }
         select{
             width: 24%;
         }
@@ -228,7 +232,7 @@
     <div id="menu"> 
         <ul id="links">
             <div>
-            <img src="static/logo.png" style="width: 70px;float: left; margin-left: 10%;">
+            <img src="../static/logo.png" style="width: 70px;float: left; margin-left: 10%;">
             <h1 style="margin-top: 2%;">FOOD NETWORK</h1>
             </div>
             <hr style="background-color: #EE2C2C; padding: 1px; width: 72%; margin-left: 11%;">
@@ -254,15 +258,17 @@
 
             <form id="formRest" class="hide">
                 <h2>Cadastrar-me como Restaurante</h2>
-                <label>Nome</label><input type="text" style="margin-right: -30px;"/>
+                <label>Nome</label><input required type="text" style="margin-right: -30px;"/>
                 <br>
-                <label>CNPJ</label><input type="number" style="margin-right: -40px;"/>
+                <label>CNPJ</label><input required type="number" style="margin-right: -40px;"/>
                 <br>
-                <label>Telefone</label><input type="tel" style="margin-right: -9px;"/> 
+                <label>Telefone</label><input required type="tel" style="margin-right: -9px;"/> 
+                <br>
+                <label>Foto</label><input type="file" />
                 <br>
                 <h3>Endereço</h3>
                 <br>
-                <label>Estado</label><SELECT name = "selecionarEstado" style="margin-right: -32px;">
+                <label>Estado</label><SELECT required name = "selecionarEstado" style="margin-right: -32px;">
                     <option selected value="ac">Acre</option> 
                     <option selected value="al">Alagoas</option> 
                     <option selected value="am">Amazonas</option> 
@@ -292,18 +298,18 @@
                     <option selected value="to">Tocantins</option> 
                  </SELECT>
                 <br>
-                <label>Cidade</label><input type="text" style="margin-right: -30px;"/> 
+                <label>Cidade</label><input required type="text" style="margin-right: -30px;"/> 
                 <br>
-                <label>Bairro</label><input type="text" style="margin-right: -38px;"/> 
+                <label>Bairro</label><input required type="text" style="margin-right: -38px;"/> 
                 <br>
-                <label>Rua</label><input type="text" style="margin-right: -55px;"/>
+                <label>Rua</label><input required type="text" style="margin-right: -55px;"/>
                 <br>
                 <h3>Funcionamento</h3>
                 <br>
-                <label>Das</label><input type="time"/> <label>até</label><input type="time"/> 
+                <label>Das</label><input required type="time"/> <label>até</label><input required type="time"/> 
                 <br>
                 <label>De</label>
-                <SELECT name = "selecionarInicio">
+                <SELECT required name = "selecionarInicio">
                     <OPTION selected value = "segunda"> Segunda </OPTION>
                     <OPTION selected value = "terca"> Terça </OPTION>
                     <OPTION selected value = "quarta"> Quarta </OPTION>
@@ -312,7 +318,7 @@
                     <OPTION selected value = "sabado"> Sábado </OPTION>
                     <OPTION selected value = "domingo"> Domingo </OPTION>
                  </SELECT> <label>à</label>
-                 <SELECT name = "selecionarFim">
+                 <SELECT required name = "selecionarFim">
                     <OPTION selected value = "segunda"> Segunda </OPTION>
                     <OPTION selected value = "terca"> Terça </OPTION>
                     <OPTION selected value = "quarta"> Quarta </OPTION>
@@ -325,9 +331,9 @@
                 <br>
                 <h3>Dados para Login</h3>
                 <br>
-                <label>Usuário</label><input type="text" style="margin-left: 5px;"/>
+                <label>Usuário</label><input required type="text" style="margin-left: 5px;"/>
                 <br>
-                <label>Senha</label><input type="password" style="margin-left: 15px;"/>
+                <label>Senha</label><input required type="password" style="margin-left: 15px;"/>
                 <br>
                 <br>
                 <button>Registrar</button>
@@ -335,17 +341,19 @@
             <br>
             <form id="formCliente" class="hide">
                 <h2>Cadastrar-me como Cliente</h2>
-                <label>Nome</label><input type="text" style="margin-right: -20px;"/>
+                <label>Nome</label><input required type="text" style="margin-right: -20px;"/>
                 <br>
-                <label>CPF</label><input type="number" style="margin-right: -38px; width: 22%;"/>
+                <label>CPF</label><input required type="number" style="margin-right: -38px; width: 22%;"/>
                 <br>
-                <label>Telefone</label><input type="tel"/> 
+                <label>Telefone</label><input required type="tel"/> 
+                <br>
+                <label>Foto</label><input type="file"/>
                 <br>
                 <h3>Dados para Login</h3>
                 <br>
-                <label>Usuário</label><input type="text" style="margin-left: 5px;"/>
+                <label>Usuário</label><input required type="text" style="margin-left: 5px;"/>
                 <br>
-                <label>Senha</label><input type="password" style="margin-left: 15px;"/>
+                <label>Senha</label><input required type="password" style="margin-left: 15px;"/>
                 <br>
                 <br>
                 <button>Registrar</button>
@@ -362,12 +370,12 @@
         </section>
         <section id="pesquisa" class="page hide" data-page="pesquisa">
             <div class="backDiv">
-                <input type="text" id="txtBusca" placeholder="Pesquisar Restaurante..."/>
+                <input type="search" id="txtBusca" placeholder="Pesquisar Restaurante..."/>
                 <button style="font-size: 85%;" type="submit" >Pesquisar</button>
             </div>
             <br>
             <div class="divResult">
-                <img src="static/mortadella.jpg" style="width: 33%; height: 37%; border-radius: 20px;"/>
+                <img src="../static/mortadella.jpg" style="width: 33%; height: 37%; border-radius: 20px;"/>
                 <h2 style="background-color: #CDC9C9; margin-left: 0; margin-top: 0; margin-bottom: 0;">Mortadella</h2>
                 <br>
                 <br>
@@ -382,8 +390,8 @@
             </div>
             <br>
             <div class="divResult">
-                <img src="static/mortadella.jpg" style="width: 33%; height: 37%; border-radius: 20px;"/>
-                <h2 style="background-color: #CDC9C9; margin-top: 0; margin-bottom: 0;">Mortadella</h2>
+                <img src="../static/rosa-mexicano.jpg" style="width: 33%; height: 37%; border-radius: 20px;"/>
+                <h2 style="background-color: #CDC9C9; margin-top: 0; margin-bottom: 0;">Rosa Mexicano</h2>
                 <br>
                 <br>
                 <h3>CNPJ:</h3><p>94898526756</p>
@@ -398,9 +406,9 @@
         </section>
         <section id="perfil" class="page hide" data-page="perfil">
             <div class="backDiv" style="text-align: left;">
-                <a href="/logout" style="background-color: #CDC9C9;"><img src="static/out.png" style="width: 20px; height: 20px; text-align: center; float: right;"></a>
+                <a href="/logout" style="background-color: #CDC9C9;"><img src="../static/out.png" style="width: 20px; height: 20px; text-align: center; float: right;"></a>
                 <br>
-                <img src="static/perfil_vazio.webp" style="border-radius: 50%; width: 100px; height: 100px;"/>
+                <img src="../static/perfil_vazio.webp" style="border-radius: 50%; width: 100px; height: 100px;"/>
                 <h2 style="background-color: #CDC9C9; ">Nome Pessoa</h2>
                 <h3>CPF/CNPJ:</h3><p>94898526756</p>
                 <br>
@@ -428,16 +436,16 @@
                 <h2 style="width: 70%;">Efetuar Reserva</h2>
                 <label>Usuário</label><input type="text" style="margin-left: 35px;"/> <!--PEGA NOME USER ATUAL-->
                 <br>
-                <label>Restaurante</label><input type="text"/>
+                <label>Restaurante</label><input required type="text"/>
                 <br>
-                <label>Dia</label><input type="date" style="margin-left: 68px;"/>
+                <label>Dia</label><input required type="date" style="margin-left: 68px;"/>
                 <br>
-                <label>Horário</label><input type="time" style="margin-left: 33px;"/>
+                <label>Horário</label><input required type="time" style="margin-left: 33px;"/>
                 <br>
-                <label>Mesa para</label><input type="number"/><label>pessoa(s)</label>
+                <label>Mesa para</label><input required type="number"/><label>pessoa(s)</label>
                 <br>
-                <label>Pratos</label><input type="number"/>
-                <label>Bebidas</label><input type="number"/>
+                <label>Pratos</label><input required type="number"/>
+                <label>Bebidas</label><input required type="number"/>
                 <button>Reservar</button>
             </form>
         </section>
