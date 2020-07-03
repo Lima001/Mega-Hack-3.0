@@ -12,11 +12,12 @@ def cpf_valido(cpf:str) -> bool:
     lista = []
     for i in cpf:
         lista.append(i)
-
-    lista.remove(".")
-    lista.remove(".")
-    lista.remove("-")
-
+    try:
+        lista.remove(".")
+        lista.remove(".")
+        lista.remove("-")
+    except:
+        pass
     # primeira etapa
     soma = 0
     cont = 10
