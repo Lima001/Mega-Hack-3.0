@@ -67,7 +67,14 @@
         select{
             width: 24%;
         }
-        
+        textarea{
+            text-align: left;
+            border-radius: 4%;
+            border-style:solid;
+            border-color: #F7F7F7;
+            background-color: #F7F7F7;
+            margin-bottom: 2%;
+        }     
         form{
             text-align: left;
 
@@ -113,10 +120,11 @@
         #menu{
             margin-left: 2%;
         }
-        #perfil h3, h4{
+        #perfil h3, h4, h5{
             margin-left: 14%;
         }
-        #perfil h3, h4, p{
+        
+        #perfil h3, h4, h5, p{
             display: inline;
             background-color: #CDC9C9;
             border-radius: 0;
@@ -215,6 +223,13 @@
                     document
                     .querySelector('#formCliente')
                     .classList.toggle('hide')
+                });
+                document
+                .querySelector('#adicionar')
+                .addEventListener("click", function(){
+                    document
+                    .querySelector('#formCardapio')
+                    .classList.toggle('hide')
                 })
         
             });
@@ -304,6 +319,8 @@
                 <br>
                 <label>Rua</label><input required type="text" style="margin-right: -55px;"/>
                 <br>
+                <label>N°</label><input required type="number" style="margin-right: -65px;"/>
+                <br>
                 <h3>Funcionamento</h3>
                 <br>
                 <label>Das</label><input required type="time"/> <label>até</label><input required type="time"/> 
@@ -385,7 +402,7 @@
                 <br>
                 <h3>Estado:</h3><p>SC</p><h3>Cidade:</h3><p>Blumenau</p>
                 <br>
-                <h3>Bairro:</h3><p>Sla</p><br><h3>Rua:</h3><p>hdfyfhdhdhu</p>
+                <h3>Bairro:</h3><p>Sla</p><br><h3>Rua:</h3><p>hdfyfhdhdhu</p><h3>N°:</h3><p>1001</p>
                 <button>Reservar</button>
             </div>
             <br>
@@ -400,7 +417,7 @@
                 <br>
                 <h3>Estado:</h3><p>SC</p><h3>Cidade:</h3><p>Blumenau</p>
                 <br>
-                <h3>Bairro:</h3><p>Sla</p><br><h3>Rua:</h3><p>hdfyfhdhdhu</p>
+                <h3>Bairro:</h3><p>Sla</p><br><h3>Rua:</h3><p>hdfyfhdhdhu</p><h3>N°:</h3><p>1001</p>
                 <button>Reservar</button>
             </div>
         </section>
@@ -415,9 +432,20 @@
                 <!--SE FOR RESTAURANTE, MOSTRAR ENDEREÇO. TITULO EM H3 E INFORMAÇÃO EM P, COMO MODELO ABAIXO-->
                 <h3>Telefone:</h3><p>472392192192</p>
                 <br>
-                <h3>Reservas:</h3><p>QUANTIDADE AQUI</p> <!--vale para ambos os perfis-->
+                <hr style="padding-bottom: 0; padding-top:0.5;"><!--SE FOR RESTAURANTE, MOSTRAR CARDÁPIO-->
+                <h3>Cardápio:</h3><button id="adicionar" style="width:40%;">Adicionar prato/bebida</button><br>
+                <h4>Entradas</h4><br>
+                <h5>Item 1:</h5><br><p style="margin-left: 14%;">Ingredientes</p><br>
+                <h4>Principais:</h4><br>
+                <h5>Item 1:</h5><br><p style="margin-left: 14%;">Ingredientes</p><br>
+                <h4>Sobremesas:</h4><br>
+                <h5>Item 1:</h5><br><p style="margin-left: 14%;">Ingredientes</p><br>
+                <h4>Bebidas:</h4><br>
+                <h5>Item 1:</h5><br><p style="margin-left: 14%;">Ingredientes</p><br>
                 <br>
                 <hr style="padding-bottom: 0; padding-top:0.5;">
+                <h3>Reservas:</h3><p>QUANTIDADE AQUI</p> <!--vale para ambos os perfis-->
+                <br>
                 <h4>Restaurante Mortadella</h4>
                 <br>
                 <h4>Dia:</h4><p>03/08/2020</p>
@@ -427,7 +455,28 @@
                 <h4>Mesa para:</h4><p>5</p>
                 <br>
                 <h4>Pratos:</h4><p>10</p><br><h4>Bebidas:</h4><p>5</p>
+                <br>
                 <hr style="padding-bottom: 0; padding-top:0.5;">
+            </div>
+            <br>
+            <div class="hide" id="formCardapio">
+                <form class="backDiv" >
+                    <h2>Adicionar Item</h2><br>
+                    <label style="margin-left:-10px;">Seção</label> <SELECT required name = "selecionarSecao">
+                        <OPTION selected value = "generico"> Genérico (Ex: bebibas)</OPTION>
+                        <OPTION selected value = "entrada"> Entrada </OPTION>
+                        <OPTION selected value = "principal"> Principal </OPTION>
+                        <OPTION selected value = "sobremesa"> Sobremesa </OPTION>
+                        </SELECT><br>
+                    <label>Tipo</label> <SELECT required name = "selecionarTipo">
+                        <OPTION selected value = "prato"> Prato </OPTION>
+                        <OPTION selected value = "bebida"> Bebida </OPTION>
+                        </SELECT><br>
+                    <label style="margin-left: -10px;">Nome</label><input type="text"/><br>
+                    <label>Ingredientes</label><br><textarea></textarea>  
+                    <br><br>
+                    <button>Adicionar</button>                      
+                </form>
             </div>
         </section>
 
@@ -448,6 +497,25 @@
                 <label>Bebidas</label><input required type="number"/>
                 <button>Reservar</button>
             </form>
+            <!--IDEIA: QUANDO CLICLAR EM RESERVAR, ABRIRÁ FORM COM QTD DE INPUTS NECESSÁRIOS. PS: NÃO SEI FAZER :P-->
+            <!--{%for i in range(npratos):%} início do laço de repetição 
+            <hr> 
+            <br>
+            <br>
+            <form action="/adicionar_itens"> 
+                <label for="itemum">Prato {{i + 1}}:</label> 
+                <input type="text" id="candum" name="item{{i+1}}" value="item{{i+1}}" required> 
+                <br>
+                <br>
+                <br>
+                {%endfor%}
+            </form> 
+            <form action="/soma">início do formulário que direcionará para a rota de adicionará mais um item 
+                <button>Adicionar</button> botão que envia executa a ação
+            </form> fim do formulário 
+            <form action="/resetar">início do formulário que direcionará para a rota que voltará para a contagem de candidatos inicial 
+                <button>Refazer</button>
+            </form>fim do formulário -->
         </section>
         
     </div>
