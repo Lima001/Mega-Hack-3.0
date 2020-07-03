@@ -25,6 +25,9 @@ def cpf_valido(cpf:str) -> bool:
         cont -= 1
 
     resto1 = (soma*10) % 11
+    if resto1 == 10:
+        resto1 = 0
+    
     digito1 = False
     if resto1 == int(lista[-2]):
         digito1 = True
