@@ -39,8 +39,20 @@ def localizar_cliente(senha, email):
         return False
 
     if verificar_senha(senha,cliente.senha):
-        return True
+        return cliente
     return False
+
+def alterar_cliente(cpf,dados):
+    try:
+        cliente = Cliente.select().where(Cliente.cpf==cpf)[0]
+        cliente.senha = gerar_senha(dados["senha"]),
+        cliente.telefone = dados["telefone"],
+        cliente.imagem = dados["imagem"],
+        cliente.idade = dados["idade"]
+        cliente.save()
+        return True
+    except:
+        return False
 
 def excluir_cliente(cpf):
     try:
@@ -86,8 +98,21 @@ def localizar_estabelecimento(email, senha):
         return False
 
     if verificar_senha(senha,estabelecimento.senha):
-        return True
+        return estabelecimento
     return False
+
+def alterar_estabelecimento(cnpj,dados):
+    try:
+        estabelecimento = Estabelecimento.select().where(Estabelecimento.cnpj==cnpj)[0]
+        estabelecimento.senha = gerar_senha(dados["senha"]),
+        estabelecimento.nome_ficticio = dados["nome_ficticio"],
+        estabelecimento.telefone = dados["telefone"],
+        estabelecimento.local = dados["local"],
+        estabelecimento.imagem = dados["imagem"],
+        estabelecimento.save()
+        return True
+    except:
+        return False
 
 def excluir_estabelecimento(cnpj):
     try:
@@ -130,6 +155,14 @@ def salvar_prato(dados):
         
         prato_criado.categorias.add(categorias_bd)
         return True
+    except:
+        return False
+
+def localizar_pratos(cnpj):
+    try:
+        estabelecimento = Estabelecimento.select().where(Estabelecimento.cnpj==cnpj)
+        pratos = Prato.select().where(Prato.estabelecimento==estabelecimento)
+        return pratos
     except:
         return False
 
@@ -178,10 +211,49 @@ def salvar_bebida(dados):
     except:
         return False
 
+def localizar_bebidas(cnpj):
+    try:
+        estabelecimento = Estabelecimento.select().where(Estabelecimento.cnpj==cnpj)
+        bebidas = Bebida.select().where(Bebida.estabelecimento==estabelecimento)
+        return bebidas
+    except:
+        return False
+
 def excluir_bebida(id):
     try:
         bebida = Bebida.get(Bebida.id==id)
         bebida.delete_instance(recursive=True)
+        return True
+    except:
+        return False
+
+#Funções para Agenda
+def salvar_agenda(cnpj,dados):
+    try:
+        estabelecimento = Estabelecimento.select().where(Estabelecimento.cnpj==cnpj)
+        Agenda.create(
+            dias = dados["dias"],
+            hora_inicio = dados["hora_inicio"],
+            hora_termino = dados["hora_termino"],
+            lotacao_maxima_permitida = dados["lotacao_maxima"],
+            estabelecimento = estabelecimento
+        )
+        return True
+    except:
+        return False
+
+def localizar_agenda(cnpj):
+    try:
+        estabelecimento = Estabelecimento.select().where(Estabelecimento.cnpj==cnpj)
+        agenda = Agenda.select().where(Agenda.estabelecimento==estabelecimento)[0]
+        return agenda
+    except:
+        return False
+
+def excluir_agenda(id):
+    try:
+        agenda = Agenda.get(Agenda.id==id)
+        agenda.delete_instance(recursive=True)
         return True
     except:
         return False
@@ -198,8 +270,16 @@ if __name__ == "__main__":
         "imagem":None,
         "idade":None}
     
+    dados_alterar = {
+        "senha": "123Senha123",
+        "telefone": "3332-2020",
+        "imagem": None,
+        "idade": 29
+    }
+
     print(salvar_cliente(dados))
-    print(localizar_cliente("123Senha123","lima123@gmaial.com"))
+    print(localizar_cliente("123Senha123","lima123@gmaial.com").nome)
+    print(alterar_cliente("723.114.194-39",dados_alterar))
     print(excluir_cliente("723.114.194-39"))
 
     print("-"*10)
@@ -214,8 +294,17 @@ if __name__ == "__main__":
             "imagem": None,
             "avaliacao": None}
 
+    dados_alterar = {
+        "senha": gerar_senha("SuperBlasterFood"),
+        "nome_ficticio": "EFOOD",
+        "telefone": "2020-1212",
+        "local": "Jaguara",
+        "imagem":None
+    }
+
     print(salvar_estabelecimento(dados))
-    print(localizar_estabelecimento("efood@gmail.com","SuperBlasterFood"))
+    print(localizar_estabelecimento("efood@gmail.com","SuperBlasterFood").nome_ficticio)
+    print(alterar_estabelecimento("65.545.322/0001-61",dados_alterar))
     print(excluir_estabelecimento("65.545.322/0001-61"))
 
     print("-"*10)
@@ -232,6 +321,7 @@ if __name__ == "__main__":
         "estabelecimento": Estabelecimento.select().where(Estabelecimento.cnpj=="45.128.959/1001-89")[0]        
     }
     print(salvar_prato(dados))
+    print(list(localizar_pratos("45.128.959/1001-89")))
     id = Prato.select(Prato.id).where(Prato.nome=="Almondega Suiça")[0]
     print(excluir_prato(id))
 
@@ -249,5 +339,6 @@ if __name__ == "__main__":
         "estabelecimento": Estabelecimento.select().where(Estabelecimento.cnpj=="45.128.959/1001-89")[0]        
     }
     print(salvar_bebida(dados))
+    print(list(localizar_bebidas("45.128.959/1001-89")))
     id = Bebida.select(Bebida.id).where(Bebida.nome=="Super Bomba de Chocolate Cremoso")[0]
     print(excluir_bebida(id))
