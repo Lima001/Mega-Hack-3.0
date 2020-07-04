@@ -230,17 +230,17 @@ def excluir_bebida(id):
 #Funções para Agenda
 def salvar_agenda(cnpj,dados):
     try:
-        estabelecimento = Estabelecimento.select().where(Estabelecimento.cnpj==cnpj)
+        estabelecimento = Estabelecimento.select().where(Estabelecimento.cnpj==cnpj)[0]
         Agenda.create(
             dias = dados["dias"],
             hora_inicio = dados["hora_inicio"],
             hora_termino = dados["hora_termino"],
-            lotacao_maxima_permitida = dados["lotacao_maxima"],
+            lotacao_maxima_permitida = dados["lotacao_maxima_permitida"],
             estabelecimento = estabelecimento
         )
         return True
     except:
-        return False
+        ptr
 
 def localizar_agenda(cnpj):
     try:
@@ -342,3 +342,14 @@ if __name__ == "__main__":
     print(list(localizar_bebidas("45.128.959/1001-89")))
     id = Bebida.select(Bebida.id).where(Bebida.nome=="Super Bomba de Chocolate Cremoso")[0]
     print(excluir_bebida(id))
+
+    print("-"*10)
+
+    dados = {
+        "dias": "1267",
+        "hora_inicio": "00:00",
+        "hora_termino": "22:42",
+        "lotacao_maxima_permitida": 69
+    }
+    print(salvar_agenda("45.128.959/1001-89",dados))
+    print(excluir_agenda(3))
