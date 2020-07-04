@@ -64,24 +64,21 @@ class Reserva(BaseModel):
     data_marcada = CharField()
     horario_chegada = CharField()
     horario_saida = CharField()
-    pratos = ManyToManyField(Prato)
-    bebidas = ManyToManyField(Bebida)
     confirmacao = BooleanField(default=False)
 
+#Classe que determina as regras para reserva
 class Agenda(BaseModel):
     dias = CharField()
     hora_inicio = CharField()
     hora_termino = CharField()
-    qtd_lugares = IntegerField()
-    lotacao_maxima_permetida = IntegerField()
+    lotacao_maxima_permitida = IntegerField()
     estabelecimento = ForeignKeyField(Estabelecimento)
 
 class Notificacao(BaseModel):
     descricao = CharField()
-    data_envio = DateTimeField()
+    data_envio = CharField()
     cliente = ForeignKeyField(Cliente)
     origem = CharField()
-    lida = BooleanField(default=False)
 
 class Ranking(BaseModel):
     pass

@@ -23,8 +23,6 @@ try:
         Estabelecimento,
         Agenda,
         Reserva,
-        Reserva.pratos.get_through_model(),
-        Reserva.bebidas.get_through_model(),
         Notificacao
         ])
 
@@ -133,8 +131,7 @@ agenda1 = Agenda.create(
     dias = "1234567",
     hora_inicio ="17:30",
     hora_termino ="23:30",
-    qtd_lugares = 15,
-    lotacao_maxima_permetida = 8,
+    lotacao_maxima_permitida = 8,
     estabelecimento = estabelecimento1
 )
 #Agendas Restaurante 2
@@ -142,19 +139,9 @@ agenda2 = Agenda.create(
     dias = "12345",
     hora_inicio ="17:30",
     hora_termino ="23:30",
-    qtd_lugares = 55,
-    lotacao_maxima_permetida = 28,
+    lotacao_maxima_permitida = 28,
     estabelecimento = estabelecimento2
 )
-agenda3 = Agenda.create(
-    dias = "67",
-    hora_inicio ="10:30",
-    hora_termino ="22:30",
-    qtd_lugares = 80,
-    lotacao_maxima_permetida = 45,
-    estabelecimento = estabelecimento2
-)
-
 
 reserva1 = Reserva.create(
     data_requisicao = datetime.now(),
@@ -174,18 +161,6 @@ reserva2 = Reserva.create(
     data_marcada = "08/07/20",
     horario_chegada = "20:45",
     horario_saida = "21:45",
-)
-
-#Reserva Feita em Horário Inapropriado de Proposito
-#Para futuros testes
-reserva3 = Reserva.create(
-    data_requisicao = datetime.now(),
-    cliente = cliente2,
-    estabelecimento = estabelecimento2,
-    qtd_pessoas = 1,
-    data_marcada = "01/07/20",
-    horario_chegada = "8:45",
-    horario_saida = "20:30",
 )
 
 notificao1 = Notificacao.create(
