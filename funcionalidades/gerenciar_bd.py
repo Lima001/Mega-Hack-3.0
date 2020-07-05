@@ -56,7 +56,8 @@ def alterar_cliente(cpf,dados):
 
 def excluir_cliente(cpf):
     try:
-        Cliente.delete().where(Cliente.cpf==cpf).execute()
+        cliente = Cliente.select().where(Cliente.cpf==cpf)[0]
+        cliente.delete_instance(recursive=True)
         return True
     except:
         return False
@@ -70,7 +71,7 @@ def salvar_estabelecimento(dados):
         return False
 
     senha = gerar_senha(dados["senha"])
-    nome_ficticio = dados["nome_ficticio"].lower()
+    nome_ficticio = dados["nome_ficticio"]
     telefone = dados["telefone"]
     local = dados["local"].lower()
     imagem = dados["imagem"]
@@ -116,7 +117,8 @@ def alterar_estabelecimento(cnpj,dados):
 
 def excluir_estabelecimento(cnpj):
     try:
-        Estabelecimento.delete().where(Estabelecimento.cnpj==cnpj).execute()
+        estabelecimento = Estabelecimento.select().where(Estabelecimento.cnpj==cnpj)[0]
+        estabelecimento.delete_instance(recursive=True)
         return True
     except:
         return False

@@ -9,8 +9,6 @@ from funcionalidades.busca import *
 app = Flask("__name__")
 
 app.config["SECRET_KEY"] = '#afashg#'
-#app.jinja_env.auto_reload = True
-#app.config['TEMPLATES_AUTO_RELOAD'] = True
 
 @app.route("/")
 def iniciar():
@@ -32,7 +30,7 @@ def processar_salvar_cliente():
             dados[k] = None
 
     if salvar_cliente(dados):
-        return "OK"
+        return redirect(url_for("iniciar"))
     else:
         return "ERRO"
 
@@ -68,7 +66,7 @@ def processar_salvar_estabelecimento():
         dados_agenda["lotacao_maxima_permitida"] = int(request.form["lotacao_maxima_permitida"])
 
         if salvar_agenda(dados["cnpj"],dados_agenda):
-            return "Ok"
+            return redirect(url_for("iniciar"))
         return "Erro"
     return "Erro"
 
@@ -253,7 +251,25 @@ def filtrar_busca():
 
 @app.route("/limpar_busca")
 def limpar_busca():
-    session.pop("resultado")
-    return redirect(url_for("iniciar"))
+    try:
+        session.pop("resultado")
+        return redirect(url_for("iniciar"))
+    except:
+        return "Erro"
 
-app.run()
+@app.route("/excluir_cliente")
+def processar_excluir_cliente():
+    cpf = request.args.get("cpf")
+    if excluir_cliente(cpf):
+        return redirect(url_for("iniciar"))
+    return "Erro"
+
+@app.route("/excluir_estabelecimento")
+def processar_excluir_estabelecimento():
+    cnpj = request.args.get("cnpj")
+    if excluir_estabelecimento(cnpj):
+        return redirect(url_for("iniciar"))
+    return "Erro"
+
+
+app.run(debug=True)

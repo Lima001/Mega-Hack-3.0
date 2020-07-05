@@ -302,13 +302,13 @@
                 <br>
                 <label>De</label>
                 <SELECT required name = "selecionarInicio">
+                    <OPTION selected value = "1"> Domingo </OPTION>
                     <OPTION selected value = "2"> Segunda </OPTION>
                     <OPTION selected value = "3"> Terça </OPTION>
                     <OPTION selected value = "4"> Quarta </OPTION>
                     <OPTION selected value = "5"> Quinta </OPTION>
                     <OPTION selected value = "6"> Sexta </OPTION>
                     <OPTION selected value = "7"> Sábado </OPTION>
-                    <OPTION selected value = "1"> Domingo </OPTION>
                  </SELECT> <label>à</label>
                  <SELECT required name = "selecionarFim">
                     <OPTION selected value = "2"> Segunda </OPTION>
@@ -317,7 +317,6 @@
                     <OPTION selected value = "5"> Quinta </OPTION>
                     <OPTION selected value = "6"> Sexta </OPTION>
                     <OPTION selected value = "7"> Sábado </OPTION>
-                    <OPTION selected value = "1"> Domingo </OPTION>
                 </SELECT>
                 <br>
                 <label>Máximo de Vagas</label><input name="lotacao_maxima_permitida" required type="number" style="margin-right: -30px;"/>
@@ -436,14 +435,14 @@
                 <h2 style="background-color: #CDC9C9; ">
                     {%if session["tipo"]=="cliente":%}
                         {{session["usuario"]["nome"]}}
-                        <h3>CPF</h3><p>{{session["usuario"]["cpf"]}}</p>
+                        <h3>CPF</h3><p>{{session["usuario"]["cpf"]}}</p>&nbsp;<a href="/excluir_cliente?cpf={{session['usuario']['cpf']}}">Excluir</a>
                         <br>
                         <h3>Email</h3><p>{{session["usuario"]["email"]}}</p>
                         <br>
                         <h3>Telefone</h3><p>{{session["usuario"]["telefone"]}}</p>
                     {%else:%}
                         {{session["usuario"]["nome_ficticio"]}}
-                        <h3>CNPJ</h3><p>{{session["usuario"]["cnpj"]}}</p>
+                        <h3>CNPJ</h3><p>{{session["usuario"]["cnpj"]}}</p>&nbsp;<a href="/excluir_estabelecimento?cnpj={{session['usuario']['cnpj']}}">Excluir</a>
                         <br>
                         <h3>Email</h3><p>{{session["usuario"]["email"]}}</p>
                         <br>
