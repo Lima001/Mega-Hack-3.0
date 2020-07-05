@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <title>Food Network</title>
+    <meta charset="uft-8">
+    <link rel="icon" href="static/logo.png" type="image/png"/>
+    <style>
+        *{
+            background-color: #EEE9E9;
+            outline: none;
+            border-radius: 4px;
+            padding: 0.8% 0.8% 0.8% 0.8%;
+            font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+        h1{
+            color: #EE2C2C;
+            text-align: left;
+            margin-top: 0;
+            margin-left: 10%;
+            margin-bottom: 5%;
+            font-size: 200%;
+        }
+        h2{
+            color: #000010;
+            text-align: left;
+            margin-left: 14%;
+            font-size: 150%;
+        }
+        h3{
+            color: #000010;
+            text-align: left;
+            margin-left: 33%;
+            width: 78%;
+        }
+        button{
+            border-radius: 4px;
+            border-style: hidden;
+            border-color: #EE2C2C;
+            background-color: #EE2C2C;
+            color: #EEE9F0;
+            width: 25%;
+            font-size: 90%;
+            font-weight: bold;
+            margin-bottom: 1%;
+        }
+        button:hover{
+            background-color: #CD2626;
+            color: #8a8a88;
+        }
+        input, select{
+            margin-top: -10%;
+            width: 50%;
+            text-align: left;
+            border-radius: 4%;
+            border-style:solid;
+            border-color: #F7F7F7;
+            background-color: #F7F7F7;
+            margin-bottom: 2%;
+        }
+        input:focus {
+            border-color:#B5B5B5;
+        }
+        input[type=file]{
+            width: 43%;
+            margin-right: -50px;
+        }
+        select{
+            width: 24%;
+        }
+        textarea{
+            text-align: left;
+            border-radius: 4%;
+            border-style:solid;
+            border-color: #F7F7F7;
+            background-color: #F7F7F7;
+            margin-bottom: 2%;
+        }     
+        form{
+            text-align: left;
+
+        }
+
+        form button{
+            display:block;
+            margin-left: 32%;
+            width: 38%;
+        }
+
+        form input{
+            width: 22%;
+        }
+        form label{
+            color: #000010;
+            background-color: #CDC9C9;
+            font-weight: bold;
+            font-size: 120%;
+        }
+        form h3{
+            margin-left: 20%;
+        }
+        li{
+            margin-top: -5%;
+            margin-left: 8%;
+            list-style:none;
+            word-spacing: 2%;
+            display: inline-block;
+            position: relative;
+            text-align: left;
+            
+        }
+        a{
+            text-decoration: none;
+        }
+        #links h3{
+            color: #8B8989;
+        }
+        #links h3:hover{
+            color: #6e6b6b;
+        }
+        #menu{
+            margin-left: 2%;
+        }
+        #perfil h3, h4, h5{
+            margin-left: 14%;
+        }
+        
+        #perfil h3, h4, h5, p{
+            display: inline;
+            background-color: #CDC9C9;
+            border-radius: 0;
+            padding-top: 0;
+            margin-bottom: 20px;
+        }
+        #formRest, #formCliente{
+            background-color: #CDC9C9;
+            width: 60%;
+            padding: 5%;
+            margin-left: 13%;
+            padding-bottom: 5%;
+            text-align: center;
+        }
+        .page{display: none;}
+        .hide { display: none;}
+        .backDiv{
+            background-color: #CDC9C9;
+            width: 60%;
+            padding: 5%;
+            margin-left: 13%;
+            text-align: center;
+        }
+        .backDiv input[type=number]{
+            width: 5%;
+        }
+        .divResult{
+            background-color: #CDC9C9;
+            width: 60%;
+            height: 80%;
+            padding: 5%;
+            padding-bottom: 10%;
+            font-size: 90%;
+            margin-left: 13%;
+            text-align: left;
+        }
+        .divResult img{
+            float: left;
+        }
+        .divResult button{
+            margin-top: 10%;
+            float: right;
+        }
+
+        .divResult h3, p{
+            background-color: #CDC9C9;
+            border-radius: 0;
+            padding-top: 0;
+            margin-bottom: 0;
+            margin-left: 0;
+            display: inline;
+        }
+        .cadastro{ 
+            position: relative;
+            text-align: left;
+            flex: 1;
+        }
+        .cadastro button{
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }       
+        @media (max-width: 550px){
+            .cadastro{
+            grid-template-columns: 1fr; 
+            }
+        }
+    </style>
+    <script
+        src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+  
+   <script >
+            //Quando o documento estiver pronto
+        $(document).ready(function() {
+            
+            //Função que mostra o conteúdo de acordo com o botão clicado
+            $("#links li a").on('click', function(e) {
+                e.preventDefault();
+                var page = $(this).data('page');
+                $("#pages .page:not('.hide')").stop().fadeOut('fast', function() {
+                    $(this).addClass('hide');
+                    $('#pages .page[data-page="'+page+'"]').fadeIn('slow').removeClass('hide');
+                });
+                document
+                .querySelector('#restaurante')
+                .addEventListener("click", function(){
+                    document
+                    .querySelector('#formRest')
+                    .classList.toggle('hide')
+                });
+                document
+                .querySelector('#cliente')
+                .addEventListener("click", function(){
+                    document
+                    .querySelector('#formCliente')
+                    .classList.toggle('hide')
+                });
+                document
+                .querySelector('#adicionar')
+                .addEventListener("click", function(){
+                    document
+                    .querySelector('#formCardapio')
+                    .classList.toggle('hide')
+                })
+        
+            });
+            
+            //Função que insere a classe Active no botão que foi clicado
+            $("#menu li").on('click', function(){
+                $(this).siblings().removeClass('active');
+                $(this).addClass('active');
+            });
+        });
+   </script>
+  
+</head> 
+<body>
+    <div id="menu"> 
+        <ul id="links">
+            <div>
+            <img src="../static/logo.png" style="width: 70px;float: left; margin-left: 10%;">
+            <h1 style="margin-top: 2%;">FOOD NETWORK</h1>
+            </div>
+            <hr style="background-color: #EE2C2C; padding: 1px; width: 72%; margin-left: 11%;">
+            <br>
+            <br>
+            <br>
+            <li><a data-page="pesquisa" href="#"><h3> Pesquisar</h3> </a></li>
+            {%if not session["usuario"]: %}
+            <li><a data-page="cadastro" href="#"><h3> Cadastrar </h3></a></li>
+            <li><a data-page="login" href="#"><h3> Login </h3></a> </li>
+            {%endif%}
+            {%if session["usuario"]: %}
+            <li><a data-page="perfil" href="#"><h3> Perfil </h3></a></li>
+                {%if session["tipo"]=="cliente":%}
+                    <li><a data-page="reservar" href="#"><h3> Reservar </h3></a></li>
+                {%endif%}
+            {%endif%}
+            
+        </ul>
+    </div>
+    <div id="pages">
+        <section id="cadastro" class="page" data-page="cadastro">
+            <h2>Cadastrar-me como...</h2>
+            <br>
+            <button id="restaurante" style="margin-left: 15%;"> Restaurante </button>
+            <button id="cliente"> Cliente </button>
+
+            <form id="formRest" class="hide" action="/salvar_estabelecimento" method="POST">
+                <h2>Cadastrar-me como Restaurante</h2>
+                <label>Nome</label><input name="nome_ficticio" required type="text" style="margin-right: -30px;"/>
+                <br>
+                <label>CNPJ</label><input name="cnpj" required type="text" style="margin-right: -40px;"/>
+                <br>
+                <label>Telefone</label><input name="telefone" required type="tel" style="margin-right: -9px;"/> 
+                <br>
+                <label>Foto</label><input name="imagem" type="file" />
+                <br>
+                <h3>Endereço</h3>
+                <br>
+                <br>
+                <label>Cidade</label><input name="local" required type="text" style="margin-right: -30px;"/> 
+                <h3>Funcionamento</h3>
+                <br>
+                <label>Das</label><input name="hora_inicio" required type="time"/> <label>até</label><input name="hora_termino" required type="time"/> 
+                <br>
+                <label>De</label>
+                <SELECT required name = "selecionarInicio">
+                    <OPTION selected value = "2"> Segunda </OPTION>
+                    <OPTION selected value = "3"> Terça </OPTION>
+                    <OPTION selected value = "4"> Quarta </OPTION>
+                    <OPTION selected value = "5"> Quinta </OPTION>
+                    <OPTION selected value = "6"> Sexta </OPTION>
+                    <OPTION selected value = "7"> Sábado </OPTION>
+                    <OPTION selected value = "1"> Domingo </OPTION>
+                 </SELECT> <label>à</label>
+                 <SELECT required name = "selecionarFim">
+                    <OPTION selected value = "2"> Segunda </OPTION>
+                    <OPTION selected value = "3"> Terça </OPTION>
+                    <OPTION selected value = "4"> Quarta </OPTION>
+                    <OPTION selected value = "5"> Quinta </OPTION>
+                    <OPTION selected value = "6"> Sexta </OPTION>
+                    <OPTION selected value = "7"> Sábado </OPTION>
+                    <OPTION selected value = "1"> Domingo </OPTION>
+                </SELECT>
+                <br>
+                <label>Máximo de Vagas</label><input name="lotacao_maxima_permitida" required type="number" style="margin-right: -30px;"/>
+                <br>
+                <br>
+                <br>
+                <h3>Dados para Login</h3>
+                <br>
+                <label>Email</label><input name="email" required type="text" style="margin-left: 5px;"/>
+                <br>
+                <label>Senha</label><input name="senha" required type="password" style="margin-left: 15px;"/>
+                <br>
+                <br>
+                <button>Registrar</button>
+            </form>
+            <br>
+            <form id="formCliente" class="hide" action="/salvar_cliente" method="POST">
+                <h2>Cadastrar-me como Cliente</h2>
+                <label>Nome</label><input name="nome" required type="text" style="margin-right: -20px;"/>
+                <br>
+                <label>CPF</label><input name="cpf" required type="text" style="margin-right: -38px; width: 22%;" placeholder="999.999.999-99"/>
+                <br>
+                <label>Telefone</label><input name="telefone" required type="tel"/> 
+                <br>
+                <label>Foto</label><input name="imagem" type="file"/>
+                <br>
+                <label>Idade</label><input name="idade" required type="text"> 
+                <br>
+                <h3>Dados para Login</h3>
+                <br>
+                <label>Email</label><input name="email" required type="text" style="margin-left: 5px;"/>
+                <br>
+                <label>Senha</label><input name="senha" required type="password" style="margin-left: 15px;"/>
+                <br>
+                <br>
+                <button>Registrar</button>
+            </form>
+        </section>
+        <section id="login" class="page hide" data-page="login">
+            <form class="backDiv" action="/login" method="POST">
+                <label>Email</label><input name="email" type="text"/>
+                <br>
+                <label>Senha</label><input name="senha" type="password" style="margin-left: 11px;"/>
+                <br>
+                <input type="radio" name="tipo" value="estabelecimento">
+                <label>Estabelecimento</label>
+                <input type="radio" name="tipo" value="cliente">
+                <label>Cliente</label><br>
+                <button>Log In</button>
+            </form>
+        </section>
+        <section id="pesquisa" class="page hide" data-page="pesquisa">
+            <div class="backDiv">
+                <form action="/buscar" method="POST">
+                    <input type="radio" name="tipo" value="estabelecimento">
+                    <label>Estabelecimento</label><br>
+                    <input type="radio" name="tipo" value="prato">
+                    <label>Prato</label><br>
+                    <input type="radio" name="tipo" value="bebida">
+                    <label>Bebida</label><br>
+                    <input type="search" name="buscatxt" id="txtBusca" placeholder="Pesquisar..."/>
+                    <button style="font-size: 85%;" type="submit" >Pesquisar</button>
+                </form>
+            </div>
+            <br>
+            {%if session["tipo_busca"] == "estabelecimento":%}
+                {%for e in session["resultado"]:%}
+                    <div class="divResult">
+                        <h3>Nome</h3><p>{{e["nome_ficticio"]}}</p><br>
+                        <h3>Telefone</h3><p>{{e["telefone"]}}</p><br>
+                        <h3>Local</h3><p>{{e["local"]}}</p><br>
+                        <h3>Email</h3><p>{{e["email"]}}</p><br>
+                    </div>
+                    <br>
+                {%endfor%}
+            {%else:%}
+                {%for i in session["resultado"]:%}
+                <div class="divResult">
+                    <h3>Estabelecimento</h3><p>{{i["estabelecimento"]["nome_ficticio"]}}</p><br>
+                    <h3>Nome</h3><p>{{i["nome"]}}</p><br>
+                    <h3>Preco</h3><p>{{i["preco"]}}</p><br>
+                    <h3>Ingredientes</h3><p>{{i["ingredientes"]}}</p><br>
+                    <h3>Descricao</h3><p>{{i["descricao"]}}</p><br>
+                </div>
+                <br>
+                {%endfor%}
+            {%endif%}
+            {%if session["resultado"]:%}
+                <h3>Filtrar</h3>
+                {%if session["tipo_busca"]=="estabelecimento":%}
+                    <form action="/filtrar_busca" method="POST">
+                    Cidade:<input type="text" name="filtro" placeholder="Filtrar..."/>
+                    <button style="font-size: 85%;" type="submit" >Pesquisar</button>
+                    </form>
+                {%else%}
+                    <form action="/filtrar_busca" method="POST">
+                    Preço Minimo:<input type="text" name="preco_min" placeholder="Filtrar..."/>
+                    Preço Maximo:<input type="text" name="preco_max" placeholder="Filtrar..."/>
+                    <button style="font-size: 85%;" type="submit" >Pesquisar</button>
+                    </form>
+                {%endif%}
+            {%endif%}
+            <a href="/limpar_busca">Limpar Buscas</a>
+        </section>
+        {%if session["usuario"]:%}
+        <section id="perfil" class="page hide" data-page="perfil">
+            <div class="backDiv" style="text-align: left;">
+                <a href="/logout" style="background-color: #CDC9C9;"><img src="../static/out.png" style="width: 20px; height: 20px; text-align: center; float: right;"></a>
+                <br>
+                <img src="../static/perfil_vazio.webp" style="border-radius: 50%; width: 100px; height: 100px;"/>
+                <h2 style="background-color: #CDC9C9; ">
+                    {%if session["tipo"]=="cliente":%}
+                        {{session["usuario"]["nome"]}}
+                        <h3>CPF</h3><p>{{session["usuario"]["cpf"]}}</p>
+                        <br>
+                        <h3>Email</h3><p>{{session["usuario"]["email"]}}</p>
+                        <br>
+                        <h3>Telefone</h3><p>{{session["usuario"]["telefone"]}}</p>
+                    {%else:%}
+                        {{session["usuario"]["nome_ficticio"]}}
+                        <h3>CNPJ</h3><p>{{session["usuario"]["cnpj"]}}</p>
+                        <br>
+                        <h3>Email</h3><p>{{session["usuario"]["email"]}}</p>
+                        <br>
+                        <h3>Telefone</h3><p>{{session["usuario"]["telefone"]}}</p>
+                        <br>
+                        <h3>Endereço</h3><p>{{session["usuario"]["local"]}}</p>
+                    {%endif%}
+                </h2>
+                <br>
+                <br>
+                {%if session["tipo"]=="estabelecimento":%}
+                    <hr style="padding-bottom: 0; padding-top:0.5;">
+                    <h3>Cardápio:</h3><button id="adicionar" style="width:40%;">Adicionar prato/bebida</button><br>
+                    <h4>Pratos</h4><br>
+                    
+                    {%for prato in session["pratos"]:%}
+                        <h5>{{prato["nome"]}} - R$ {{prato["preco"]}}</h5>
+                        <br>
+                        <p style="margin-left: 14%;">{{prato["ingredientes"]}}</p><br>
+                        <p style="margin-left: 14%;">{{prato["descricao"]}}</p><br>
+                        <a href="/excluir_prato?id={{prato.id}}">Excluir</a>
+                        <br>
+                    {%endfor%}
+
+                    <h4>Bebidas:</h4><br>
+                    {%for bebida in session["bebidas"]:%}
+                        <h5>{{bebida["nome"]}} - R$ {{bebida["preco"]}}</h5>
+                        <br>
+                        <p style="margin-left: 14%;">{{bebida["ingredientes"]}}</p><br>
+                        <p style="margin-left: 14%;">{{bebida["descricao"]}}</p><br>
+                        <a href="/excluir_bebida?id={{bebida.id}}">Excluir</a>
+                        <br>
+                    {%endfor%}
+
+                {%endif%}
+                
+                <hr style="padding-bottom: 0; padding-top:0.5;">
+                <h3>Reservas:</h3><br>
+                {%for reserva in session["reserva"]:%}
+                    <h4>Cliente:</h4><p>{{reserva["cliente"]["nome"]}}</p><br>
+                    <h4>Cliente Telefone:</h4><p>{{reserva["cliente"]["telefone"]}}</p><br>
+                    <h4>Estabelecimento:</h4><p>{{reserva["estabelecimento"]["nome_ficticio"]}}</p><br>
+                    <h4>Estabelecimento Telefone::</h4><p>{{reserva["estabelecimento"]["telefone"]}}</p><br>
+                    <h4>Vagas:</h4><p>{{reserva["qtd_pessoas"]}}</p><br>
+                    <h4>Data:</h4><p>{{reserva["data_marcada"]}}</p><br>
+                    <h4>Chegada:</h4><p>{{reserva["horario_chegada"]}}</p><br>
+                    <h4>Saida:</h4><p>{{reserva["horario_saida"]}}</p><br>
+                    <h4>Confirmação:</h4><p>{{reserva["confirmacao"]}}</p><br>
+                    {%if session["tipo"]=="estabelecimento":%}
+                        <a href="/confirmar_reserva?id={{reserva['id']}}">Confirmar</a>
+                    {%endif%}
+                    <br><br>
+                {%endfor%}
+                <hr style="padding-bottom: 0; padding-top:0.5;">
+            </div>
+            <br>
+            <div class="hide" id="formCardapio">
+                <form class="backDiv" action="/inserir_prato_bebida" method="POST">
+                    <h2>Adicionar Item</h2><br>
+                    <input type="hidden" name="estabelecimento" value="{{session['usuario']['cnpj']}}">
+                    <label>Tipo</label> <SELECT required name = "selecionarTipo">
+                        <OPTION selected value = "prato"> Prato </OPTION>
+                        <OPTION selected value = "bebida"> Bebida </OPTION>
+                        </SELECT><br>
+                    <label style="margin-left: -10px;">Nome</label><input name="nome" type="text"/><br>
+                    <label style="margin-left: -10px;">Preço</label><input name="preco" type="text"/><br>
+                    <label>Ingredientes</label><br><textarea name="ingredientes"></textarea><br>
+                    <label>Descricao</label><br><textarea name="descricao"></textarea><br>
+                    <label style="margin-left: -10px;">Categorias</label><input name="categorias" type="text" placeholder="Separe por virgula Ex. frito,caseiro,..."/><br>
+                    <br>
+                    <button>Adicionar</button>                      
+                </form>
+            </div>
+        </section>
+        {%endif%}
+        {%if session["tipo"]=="cliente":%}
+        <section id="reservar" class="page hide" data-page="reservar">
+            <form class="backDiv" action="/realizar_reserva" method="POST">
+                <h2 style="width: 70%;">Efetuar Reserva</h2>
+                <input type="hidden" name="cpf" value="{{session['usuario']['cpf']}}"/>
+                <br>
+                <label>Nome Restaurante</label><input name="nome_estabelecimento" required type="text"/>
+                <br>
+                <label>Dia</label><input required type="text" placeholder="dd/mm/aaaa" name="data_marcada" style="margin-left: 68px;"/>
+                <br>
+                <label>Horário Chegada</label><input required name="horario_chegada" type="time" style="margin-left: 33px;"/>
+                <br>
+                <label>Horário Saida</label><input required name="horario_saida" type="time" style="margin-left: 33px;"/>
+                <br>
+                <label>Mesa para</label><input required name="qtd_pessoas" type="number"/><label>pessoa(s)</label>
+                <br>
+                <button>Reservar</button>
+            </form>
+        </section>
+        {%endif%}
+        
+    </div>
+        
+        
+        <!--ao clicar em efetuar cadastro, o usuário escolherá: cadastrar como empresa ou como cliente-->
+        <!--após selecionar a opção, vai direcionar pro formulário escolhido-->
+        <!--uma empresa só poderá se cadastrar com cnpj existente e um cliente com seu cpf-->
+        
+    </div> 
+    <br> 
+    <br>
+</body>
+</html>
