@@ -1,8 +1,12 @@
 # Este modulo acrescenta funcionalidades para gerenciar o Banco de Dados
 # Usado para performar CRUD na base de dados
 
-from funcionalidades.seguranca import *
-from funcionalidades.classes import *
+if __name__ == "__main__":
+    from seguranca import *
+    from classes import *
+else:
+    from funcionalidades.seguranca import *
+    from funcionalidades.classes import *
 
 #Funções para Cliente
 def salvar_cliente(dados):

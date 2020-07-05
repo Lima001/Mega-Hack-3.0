@@ -1,7 +1,7 @@
 from peewee import *
 import os
 
-arquivo = "teste.db"
+arquivo = "base_dados.db"
 db = SqliteDatabase(arquivo)
 
 class BaseModel(Model):

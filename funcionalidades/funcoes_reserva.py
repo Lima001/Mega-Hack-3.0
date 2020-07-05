@@ -1,7 +1,11 @@
 # Este modulo acrescenta funcionalidades para gerenciar as agendas dos restaurantes
 # pode ser usada para manter a integridade das reservas e da agenda no geral
 from datetime import datetime
-from funcionalidades.classes import *
+
+if __name__ == "__main__":
+    from classes import *
+else:
+    from funcionalidades.classes import *
 
 def verificar_bissexto(ano):
     if (ano % 4 == 0 and ano % 100 != 0) or (ano % 400 == 0):

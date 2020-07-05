@@ -2,7 +2,11 @@
 # ser importadas e usadas na plataforma para filtrar e refinar as pesquisas
 # Ex: Ranking, Prato Mais Visto do Estabeleciemento etc...
 
-from funcionalidades.classes import *
+if __name__ == "__main__":
+    from classes import *
+else:
+    from funcionalidades.classes import *
+
 import json
 from playhouse.shortcuts import model_to_dict
 
