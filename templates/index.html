@@ -32,7 +32,7 @@
             margin-left: 33%;
             width: 78%;
         }
-        button{
+        button, #pesquisa a, #perfil a{
             border-radius: 4px;
             border-style: hidden;
             border-color: #EE2C2C;
@@ -141,6 +141,13 @@
         }
         .page{display: none;}
         .hide { display: none;}
+        #backForm{
+            background-color: #CDC9C9;
+            width: 60%;
+            padding: 5%;
+            margin-left: 13%;
+            text-align: center;
+        }
         .backDiv{
             background-color: #CDC9C9;
             width: 60%;
@@ -319,9 +326,9 @@
                 <br>
                 <h3>Dados para Login</h3>
                 <br>
-                <label>Email</label><input name="email" required type="text" style="margin-left: 5px;"/>
+                <label>Email</label><input name="email" required type="text" style="margin-left: 20px;"/>
                 <br>
-                <label>Senha</label><input name="senha" required type="password" style="margin-left: 15px;"/>
+                <label>Senha</label><input name="senha" required type="password" style="margin-left: 15px;" />
                 <br>
                 <br>
                 <button>Registrar</button>
@@ -337,11 +344,11 @@
                 <br>
                 <label>Foto</label><input name="imagem" type="file"/>
                 <br>
-                <label>Idade</label><input name="idade" required type="text"> 
+                <label>Idade</label><input name="idade" required type="text" style="margin-left: 20px;"/> 
                 <br>
                 <h3>Dados para Login</h3>
                 <br>
-                <label>Email</label><input name="email" required type="text" style="margin-left: 5px;"/>
+                <label>Email</label><input name="email" required type="text" style="margin-left: 20px;"/>
                 <br>
                 <label>Senha</label><input name="senha" required type="password" style="margin-left: 15px;"/>
                 <br>
@@ -353,28 +360,31 @@
             <form class="backDiv" action="/login" method="POST">
                 <label>Email</label><input name="email" type="text"/>
                 <br>
-                <label>Senha</label><input name="senha" type="password" style="margin-left: 11px;"/>
+                <label>Senha</label><input name="senha" type="password"/>
                 <br>
-                <input type="radio" name="tipo" value="estabelecimento">
                 <label>Estabelecimento</label>
-                <input type="radio" name="tipo" value="cliente">
-                <label>Cliente</label><br>
+                <input type="radio" name="tipo" value="estabelecimento" style="margin-right: -70px;"><br>
+                <label>Cliente</label>
+                <input type="radio" name="tipo" value="cliente" style="margin-right: -145px;">
+                <br>
+                <br>
                 <button>Log In</button>
             </form>
         </section>
         <section id="pesquisa" class="page hide" data-page="pesquisa">
-            <div class="backDiv">
-                <form action="/buscar" method="POST">
-                    <input type="radio" name="tipo" value="estabelecimento">
-                    <label>Estabelecimento</label><br>
-                    <input type="radio" name="tipo" value="prato">
-                    <label>Prato</label><br>
-                    <input type="radio" name="tipo" value="bebida">
-                    <label>Bebida</label><br>
-                    <input type="search" name="buscatxt" id="txtBusca" placeholder="Pesquisar..."/>
-                    <button style="font-size: 85%;" type="submit" >Pesquisar</button>
-                </form>
-            </div>
+            <form action="/buscar" method="POST" id="backForm">
+                <label>Estabelecimento</label> 
+                <input type="radio" name="tipo" value="estabelecimento"style="margin-left: -10%;">
+                <label>Prato</label>
+                <input type="radio" name="tipo" value="prato" style="margin-left: -10%;">
+                
+                <label>Bebida</label>
+                <input type="radio" name="tipo" value="bebida" style="margin-left: -10% ;">
+                <br>
+                <br>
+                <input type="search" name="buscatxt" id="txtBusca" placeholder="Pesquisar..." style="width: 70%;"/>
+                <button style="font-size: 85%;" type="submit" >Pesquisar</button>
+            </form>
             <br>
             {%if session["tipo_busca"] == "estabelecimento":%}
                 {%for e in session["resultado"]:%}
@@ -399,21 +409,23 @@
                 {%endfor%}
             {%endif%}
             {%if session["resultado"]:%}
-                <h3>Filtrar</h3>
                 {%if session["tipo_busca"]=="estabelecimento":%}
-                    <form action="/filtrar_busca" method="POST">
-                    Cidade:<input type="text" name="filtro" placeholder="Filtrar..."/>
-                    <button style="font-size: 85%;" type="submit" >Pesquisar</button>
+                    <form action="/filtrar_busca" method="POST" class="backDiv">
+                        <h3>Filtrar Lugar</h3>
+                        <label>Cidade</label><input type="text" name="filtro" placeholder="Filtrar..."/>
+                        <button style="font-size: 85%;" type="submit" >Pesquisar</button>
                     </form>
                 {%else%}
-                    <form action="/filtrar_busca" method="POST">
-                    Preço Minimo:<input type="text" name="preco_min" placeholder="Filtrar..."/>
-                    Preço Maximo:<input type="text" name="preco_max" placeholder="Filtrar..."/>
-                    <button style="font-size: 85%;" type="submit" >Pesquisar</button>
+                    <form action="/filtrar_busca" method="POST" class="backDiv">
+                        <h3>Filtrar Preço</h3>
+                        <label>Minimo:</label><input type="text" name="preco_min" placeholder="Filtrar..."/><br>
+                        <label>Maximo:</label><input type="text" name="preco_max" placeholder="Filtrar..."/>
+                        <button style="font-size: 85%;" type="submit" >Pesquisar</button>
                     </form>
                 {%endif%}
             {%endif%}
-            <a href="/limpar_busca">Limpar Buscas</a>
+            <br>
+            <a href="/limpar_busca" style="text-align: center;">Limpar Buscas</a>
         </section>
         {%if session["usuario"]:%}
         <section id="perfil" class="page hide" data-page="perfil">
@@ -498,9 +510,9 @@
                         </SELECT><br>
                     <label style="margin-left: -10px;">Nome</label><input name="nome" type="text"/><br>
                     <label style="margin-left: -10px;">Preço</label><input name="preco" type="text"/><br>
-                    <label>Ingredientes</label><br><textarea name="ingredientes"></textarea><br>
-                    <label>Descricao</label><br><textarea name="descricao"></textarea><br>
-                    <label style="margin-left: -10px;">Categorias</label><input name="categorias" type="text" placeholder="Separe por virgula Ex. frito,caseiro,..."/><br>
+                    <label>Ingredientes</label><br><textarea name="ingredientes" style="margin-right: -40px;"></textarea><br>
+                    <label>Descricao</label><br><textarea name="descricao" style="margin-right: -40px;"></textarea><br>
+                    <label style="margin-left: -40px;">Categorias</label><input name="categorias" type="text" placeholder="Separe por virgula Ex. frito,caseiro,..."/><br>
                     <br>
                     <button>Adicionar</button>                      
                 </form>
@@ -515,11 +527,11 @@
                 <br>
                 <label>Nome Restaurante</label><input name="nome_estabelecimento" required type="text"/>
                 <br>
-                <label>Dia</label><input required type="text" placeholder="dd/mm/aaaa" name="data_marcada" style="margin-left: 68px;"/>
+                <label>Dia</label><input required type="text" placeholder="dd/mm/aaaa" name="data_marcada" style="margin-left: 120px;"/>
                 <br>
-                <label>Horário Chegada</label><input required name="horario_chegada" type="time" style="margin-left: 33px;"/>
+                <label>Horário Chegada</label><input required name="horario_chegada" type="time" style="margin-left: 15px;"/>
                 <br>
-                <label>Horário Saida</label><input required name="horario_saida" type="time" style="margin-left: 33px;"/>
+                <label>Horário Saida</label><input required name="horario_saida" type="time" style="margin-left: 40px;"/>
                 <br>
                 <label>Mesa para</label><input required name="qtd_pessoas" type="number"/><label>pessoa(s)</label>
                 <br>
@@ -527,15 +539,6 @@
             </form>
         </section>
         {%endif%}
-        
-    </div>
-        
-        
-        <!--ao clicar em efetuar cadastro, o usuário escolherá: cadastrar como empresa ou como cliente-->
-        <!--após selecionar a opção, vai direcionar pro formulário escolhido-->
-        <!--uma empresa só poderá se cadastrar com cnpj existente e um cliente com seu cpf-->
-        
-    </div> 
     <br> 
     <br>
 </body>
