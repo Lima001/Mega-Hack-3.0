@@ -22,7 +22,7 @@ Devido ao cenário mundial atual pode-se visualizar o avanço da tecnologia como
 Criação de uma plataforma para dar suporte aos estabelecimentos do ramo alimentício e seus clientes visando atender as demandas de negócio e auxiliar a todos em momentos de dificuldade como o vivido atualmente (Pandemia 2020). A plataforma permitiria aos cliente uma maneira eficiente de pesquisar por estabelecimentos e realizar a sua reserva neste mesmo local, de forma fácil e padronizada para todos os casos. Os estabelecimentos teriam o controle total de reservas e acesso a ferramentas de analise de dados para impulsionar seu negóico, encontrando assim na plataforma um meio de anunciar, gerenciar e desenvolver o seu negócio de maneira simples e eficiente.
   
 ### Links Externos
-[__Pitch__](Link Aqui)  
+[__Pitch__](https://youtu.be/4x9zne3ARGk)  
 [__Demonstração__](https://youtu.be/LbFzg5wJn7I)
   
   
