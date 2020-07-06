@@ -1,3 +1,6 @@
+#Servidor python construido com a biblioteca Flask
+#Aqui estão presentes todas as rotas da nossa plataforma
+
 import os
 from playhouse.shortcuts import model_to_dict
 from flask import Flask, render_template, request, redirect, url_for, session, json, jsonify, session

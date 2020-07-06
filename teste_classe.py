@@ -1,3 +1,8 @@
+#Cria classes para testar os modelos implementados em peewee
+#Caso seja executado novamente, irá resetar o banco de dados para
+#o seu estado primário, perdendo qualquer nova mudança realizada
+#pela plataforma
+
 from funcionalidades.classes import *
 from funcionalidades.seguranca import gerar_senha
 from datetime import datetime

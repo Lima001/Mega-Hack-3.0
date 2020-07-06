@@ -77,8 +77,6 @@ def filtrar_por_preco(objetos, preco_min=0, preco_max=100000):
 if __name__ == "__main__":
     db.connect()
     
-    #Isso aqui pode parecer confuso, mas acreditem... Eu entendo o que está acontecendo
-    
     #Teste funções estabelecimento
     resultado = buscar_estabelecimento_por_nome("a") 
     print(resultado)

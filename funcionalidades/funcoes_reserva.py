@@ -79,7 +79,6 @@ def selecionar_agenda(data_marcada,estabelecimento):
         dia_formatado = {0:7, 1:1, 2:2, 3:3, 4:4, 5:5, 6:6}
         num_dia = dia_formatado[calcular_congruencia_zeller(dia,mes,ano)]
         agendas = Agenda.select().where(Agenda.estabelecimento==estabelecimento)
-        print("OIIII")
         for i in agendas:
             if str(num_dia) in i.dias:
                 return i
@@ -174,6 +173,7 @@ def confirmar_reserva(id_reserva):
     except:
         return False
 
+#Testes do módulo
 if __name__ =="__main__":
     db.connect()
     estabelecimento = Estabelecimento.select().where(Estabelecimento.cnpj=="42.318.949/0001-84")[0]

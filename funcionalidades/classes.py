@@ -1,3 +1,6 @@
+#Modelagem das classes utilizadas pelo ORM Peewee no mapeameto
+#para Banco de Dados
+
 from peewee import *
 import os
 
